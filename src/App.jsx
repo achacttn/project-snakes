@@ -8,6 +8,14 @@ import Wrapper from './layout/Wrapper.jsx';
 const App = () => {
 
     const [ row, setRow ] = React.useState(10);
+
+    const manageRow = direction => {
+        if( direction === "increase" ){
+            
+        }
+    }
+
+    const [ column, setColumn ] = React.useState(10);
     
     return (
         <Wrapper>
