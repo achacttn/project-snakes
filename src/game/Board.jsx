@@ -8,6 +8,24 @@ export default ({ numOfRows, numOfSquares }) => {
         console.log(111, numOfRows, 222, numOfSquares);
     });
 
+    const generateSquares = () => {
+        let squares = [];
+        for( let i=0; i<numOfSquares; i++ ){
+            squares.push(<span key={i}>Y</span>)
+        }
+        return squares
+    }
+
+    const generateRows = () => {
+        let rowContainer = [];
+        for( let j=0; j<numOfRows; j++ ){
+            rowContainer.push(
+                <div key={j}>{ generateSquares() }</div>
+            )
+        }
+        return rowContainer
+    }
+
     return (
         <div className={style.BoardContainer}>
             <div>
@@ -18,6 +36,11 @@ export default ({ numOfRows, numOfSquares }) => {
             </div>
             <div>
                 Squares: { numOfSquares }
+            </div>
+            <div>
+                {
+                    generateRows()
+                }
             </div>
         </div>
     )
