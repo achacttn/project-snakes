@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './ControlPanel.module.css';
 
-export default () => {
+export default ({ numOfRows, numOfSquares, rowHandler, squareHandler }) => {
     
-    const [ row, setRow ]       = React.useState(10);
-    
-    const [ column, setColumn ] = React.useState(10);
+    React.useEffect(()=>{
+        console.log('=== ControlPanel.jsx mounted ===');
+    });
     
     return (
         <div className={style.ControlPanelContainer}>
@@ -13,14 +13,22 @@ export default () => {
                 <h2>Control Panel</h2>
             </div>
             <div>
-                Row count: { row }
-                <button onClick={()=>setRow( row + 1 )}>+</button>
-                <button onClick={()=>setRow( row - 1 )}>-</button>
+                <div>
+                    Row count: { numOfRows }
+                </div>
+                <div>
+                    <button onClick={()=>rowHandler("decrease")}>-</button>
+                    <button onClick={()=>rowHandler("increase")}>+</button>
+                </div>
             </div>
             <div>
-                Column count: { column }
-                <button onClick={()=>setColumn( column + 1 )}>+</button>
-                <button onClick={()=>setColumn( column - 1 )}>-</button>
+                <div>
+                    Square count: { numOfSquares }
+                </div>
+                <div>
+                    <button onClick={()=>squareHandler("decrease")}>-</button>
+                    <button onClick={()=>squareHandler("increase")}>+</button>
+                </div>
             </div>
         </div>
     );
