@@ -1,0 +1,8 @@
+.RowContainer {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    /* color: red; */
+    border: 2px solid green;
+}

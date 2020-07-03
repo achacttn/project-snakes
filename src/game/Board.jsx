@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './Board.module.css';
+import Row from './Row.jsx';
 
 export default ({ numOfRows, numOfSquares }) => {
 
@@ -20,7 +21,8 @@ export default ({ numOfRows, numOfSquares }) => {
         let rowContainer = [];
         for( let j=0; j<numOfRows; j++ ){
             rowContainer.push(
-                <div key={j}>{ generateSquares() }</div>
+                // <div key={j}>{ generateSquares() }</div>
+                <Row/>
             )
         }
         return rowContainer
