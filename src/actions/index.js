@@ -1,7 +1,4 @@
-// const INCREASE_ROW      = "INCREASE_ROW";
-// const DECREASE_ROW      = "DECREASE_ROW";
-// const INCREASE_SQUARE   = "INCREASE_SQUARE";
-// const DECREASE_SQUARE   = "DECREASE_SQUARE";
+// ACTION CREATORS
 
 let rowCount    = 10;
 let squareCount = 10;
@@ -24,4 +21,3 @@ export const subtractSquare    = ({
     type    : "SUBTRACT_SQUARE",
     squares : squareCount--,
 });
-
