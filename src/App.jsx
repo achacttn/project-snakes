@@ -11,41 +11,11 @@ const App = () => {
         console.log('=== App.jsx mounted ===');
     });
 
-    const [ row, setRow ]       = React.useState(10);
-
-    const [ square, setSquare ] = React.useState(10);
-
-    const manageRow = direction => {
-        if( direction === "increase" && row < 20 ){
-            setRow( row + 1 );
-        }
-        if( direction === "decrease" && row > 10 ){
-            setRow( row - 1 );
-        }
-    }
-
-    const manageSquares = direction => {
-        if (direction === "increase" && square < 20) {
-            setSquare( square + 1 );
-        }
-        if (direction === "decrease" && square > 10) {
-            setSquare( square - 1 );
-        }
-    }
-
     return (
         <Wrapper>
             <div className={style.AppContainer}>
-                <ControlPanel
-                    numOfRows       ={ row }
-                    numOfSquares    ={ square }
-                    rowHandler      ={ manageRow }
-                    squareHandler   ={ manageSquares }
-                />
-                <Board
-                    numOfRows={row}
-                    numOfSquares={square}
-                />
+                <ControlPanel />
+                <Board />
             </div>
         </Wrapper>
     );

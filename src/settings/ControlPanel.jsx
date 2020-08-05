@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-export default ({ numOfRows, numOfSquares, rowHandler, squareHandler }) => {
+const ControlPanel = ({ dispatch }) => {
     
     React.useEffect(()=>{
         console.log('=== ControlPanel.jsx mounted ===');
@@ -14,22 +15,27 @@ export default ({ numOfRows, numOfSquares, rowHandler, squareHandler }) => {
             </div>
             <div>
                 <div>
-                    Row count: { numOfRows }
+                    Row count: number-of-rows-here
                 </div>
                 <div>
-                    <button onClick={()=>rowHandler("decrease")}>-</button>
-                    <button onClick={()=>rowHandler("increase")}>+</button>
+                    <button onClick={()=>dispatch({ type: "ROW_SUBTRACT" })}>-</button>
+                    <button onClick={()=>dispatch({ type: "ROW_ADD" })}>+</button>
                 </div>
             </div>
             <div>
                 <div>
-                    Square count: { numOfSquares }
+                    Square count: number-of-squares-here
                 </div>
                 <div>
-                    <button onClick={()=>squareHandler("decrease")}>-</button>
-                    <button onClick={()=>squareHandler("increase")}>+</button>
-                </div>
+                    <button onClick={()=>dispatch({ type: "SQUARE_SUBTRACT" })}>-</button>
+                    <button onClick={()=>dispatch({ type: "SQUARE_ADD" })}>+</button>
             </div>
+                </div>
         </div>
     );
 };
+
+export default connect(
+    null,
+    null,
+)(ControlPanel);

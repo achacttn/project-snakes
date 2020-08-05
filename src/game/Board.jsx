@@ -1,17 +1,17 @@
 import React from 'react';
+import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-export default ({ numOfRows, numOfSquares }) => {
+const Board = ({ rows, squares }) => {
 
     React.useEffect(()=>{
         console.log('=== Board component mounted ===');
-        console.log(111, numOfRows, 222, numOfSquares);
     });
 
     const generateSquares = () => {
         let squares = [];
-        for( let i=0; i<numOfSquares; i++ ){
+        for( let i=0; i<squares; i++ ){
             squares.push(<span key={i}>Y</span>)
         }
         return squares
@@ -19,10 +19,9 @@ export default ({ numOfRows, numOfSquares }) => {
 
     const generateRows = () => {
         let rowContainer = [];
-        for( let j=0; j<numOfRows; j++ ){
+        for( let j=0; j<rows; j++ ){
             rowContainer.push(
-                // <div key={j}>{ generateSquares() }</div>
-                <Row/>
+                <Row key={j}/>
             )
         }
         return rowContainer
@@ -34,10 +33,10 @@ export default ({ numOfRows, numOfSquares }) => {
                 <h2>Board</h2>
             </div>
             <div>
-                Rows: { numOfRows }
+                Rows: { rows }
             </div>
             <div>
-                Squares: { numOfSquares }
+                Squares: { squares }
             </div>
             <div>
                 {
@@ -47,3 +46,13 @@ export default ({ numOfRows, numOfSquares }) => {
         </div>
     )
 };
+
+let mapStateToProps = ( state ) => {
+    let { rows, squares } = state.board;
+    return { rows, squares};
+}
+
+export default connect(
+    mapStateToProps,
+    null,
+)(Board);
