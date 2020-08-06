@@ -1,5 +1,16 @@
 .BoardContainer {
-    height: 900px;
+    /* width: 100%; */
+    height: auto;
     background-color: #98b998;
     padding: 20px;
+}
+
+.BoardEdge {
+    min-height: 1200px;
+    /* padding: 20px; */
+    border: 2px solid purple;
+}
+
+.GameBoard {
+    display: flex;
 }
