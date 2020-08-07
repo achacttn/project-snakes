@@ -1,6 +1,6 @@
-const airbnb = require('@neutrinojs/airbnb');
+// const airbnb = require('@neutrinojs/airbnb');
 const react = require('@neutrinojs/react');
-const jest = require('@neutrinojs/jest');
+// const jest = require('@neutrinojs/jest');
 
 module.exports = {
   options: {
@@ -9,10 +9,11 @@ module.exports = {
   use: [
     // airbnb(),
     react({
+      publicPath: '/sp/',      
       html: {
-        title: 'project-snake'
+        title: 'Single-player Snake'
       }
     }),
-    jest(),
+    // jest(),
   ],
 };
