@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-const ControlPanel = ({ dispatch, rows, squares }) => {
+const ControlPanel = ({ dispatch, size, rows, squares }) => {
     
     React.useEffect(()=>{
         console.log('=== ControlPanel.jsx mounted ===');
@@ -15,27 +15,18 @@ const ControlPanel = ({ dispatch, rows, squares }) => {
             </div>
             <div>
                 <div>
-                    Row count: { rows }
+                    Size: { size }
                 </div>
                 <div>
-                    <button onClick={()=>dispatch({ type: "ROW_SUBTRACT" })}>-</button>
-                    <button onClick={()=>dispatch({ type: "ROW_ADD" })}>+</button>
+                    <button onClick={()=>dispatch({ type: "INCREASE_BOARD" })}>+</button>
+                    <button onClick={()=>dispatch({ type: "DECREASE_BOARD" })}>-</button>
                 </div>
             </div>
             <div>
-                <div>
-                    Square count: { squares }
-                </div>
-                <div>
-                    <button onClick={()=>dispatch({ type: "SQUARE_SUBTRACT" })}>-</button>
-                    <button onClick={()=>dispatch({ type: "SQUARE_ADD" })}>+</button>
-                </div>
+                Score: n/a
             </div>
             <div>
-                Score:
-            </div>
-            <div>
-                Tickrate:
+                Tickrate: n/a
             </div>
             <div>
                 Play/Pause
@@ -45,8 +36,8 @@ const ControlPanel = ({ dispatch, rows, squares }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { rows, squares } = state.board;
-    return { rows, squares };
+    let { size, rows, squares } = state.board;
+    return { size, rows, squares };
 };
 
 export default connect(

@@ -9,7 +9,7 @@ module.exports = {
   use: [
     // airbnb(),
     react({
-      publicPath: '/sp/',      
+      // publicPath: '/sp/',      
       html: {
         title: 'Single-player Snake'
       }

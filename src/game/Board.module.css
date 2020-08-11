@@ -1,16 +1,26 @@
 .BoardContainer {
-    /* width: 100%; */
+    width: 100%;
     height: auto;
     background-color: #98b998;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 .BoardEdge {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     min-height: 1200px;
-    /* padding: 20px; */
-    border: 2px solid purple;
+    height: 100%;
+    /* padding: 20px 0px; */
+    /* border: 1px solid purple; */
 }
 
 .GameBoard {
+    /* min-width: 1200px; */
+    width: 100%;
+    /* margin: 0 auto; */
+    min-height: 1200px;
+    height: 100%;
     display: flex;
+    flex-flow: row nowrap;
 }

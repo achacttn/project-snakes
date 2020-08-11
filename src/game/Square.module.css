@@ -1,8 +1,5 @@
 .SquareContainer {
-    display: inline-block;
-    min-width: 25px;
-    width: auto;
-    min-height: 25px;
-    background-color: pink;
-    border: 1px solid black;
+    background-color: #D9AFD9;
+    background-image: linear-gradient(45deg, #D9AFD9 0%, #97D9E1 100%);
+    flex: 1 0 0;
 }

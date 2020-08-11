@@ -1,4 +1,4 @@
-import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT } from './actionTypes.js';
+import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT, INCREASE_BOARD, DECREASE_BOARD } from './actionTypes.js';
 
 let actionId = 0;
 
@@ -25,6 +25,20 @@ export const addSquare = () => ({
 
 export const subtractSquare = () => ({
     type: SQUARE_SUBTRACT,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const increaseBoard = () => ({
+    type: INCREASE_BOARD,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const decreaseBoard = () => ({
+    type: DECREASE_BOARD,
     payload: {
         id: ++actionId,
     }
