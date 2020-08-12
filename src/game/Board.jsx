@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ rows, squares }) => {
+const Board = ({ size }) => {
 
     React.useEffect(()=>{
         console.log('=== Board component mounted ===');
@@ -11,13 +11,13 @@ const Board = ({ rows, squares }) => {
 
     const generateRows = () => {
         let rowContainer = [];
-        for( let i=0; i<rows; i++ ){
+        for( let i=0; i<size; i++ ){
             rowContainer.push(
                 <Row key={i} rowPos={i}/>
             )
         }
-        return rowContainer
-    }
+        return rowContainer;
+    };
 
     return (
         <div className={style.BoardContainer}>
@@ -33,9 +33,9 @@ const Board = ({ rows, squares }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { rows, squares } = state.board;
-    return { rows, squares};
-}
+    let { size } = state.board;
+    return { size };
+};
 
 export default connect(
     mapStateToProps,

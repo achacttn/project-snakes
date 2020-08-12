@@ -10,26 +10,21 @@ const ControlPanel = ({ dispatch, size, rows, squares }) => {
     
     return (
         <div className={style.ControlPanelContainer}>
-            <div>
-                <h2>Settings</h2>
-            </div>
-            <div>
-                <div>
-                    Size: { size }
+            <div className={style.ControlPanelGridContainer}>
+                <div className={style.GridScoreLabel}>Score</div>
+                <div className={style.GridScoreValue}>score-value</div>
+                <div className={style.GridSizeLabel}>Size</div>
+                <div className={style.GridSizeValue}>{ size }</div>
+                <div className={style.GridTickrateLabel}>Tickrate</div>
+                <div className={style.GridTickrateValue}>tickrate-value</div>
+                <div className={style.GridSizeButtons}>
+                    <button onClick={() => dispatch({ type: "DECREASE_BOARD" })} disabled={true}>-</button>
+                    <button onClick={() => dispatch({ type: "INCREASE_BOARD" })} disabled={true}>+</button>
                 </div>
-                <div>
-                    <button onClick={()=>dispatch({ type: "INCREASE_BOARD" })}>+</button>
-                    <button onClick={()=>dispatch({ type: "DECREASE_BOARD" })}>-</button>
+                <div className={style.GridStateButtons}>
+                    <button disabled={true}>Play</button>
+                    <button disabled={true}>Pause</button>
                 </div>
-            </div>
-            <div>
-                Score: n/a
-            </div>
-            <div>
-                Tickrate: n/a
-            </div>
-            <div>
-                Play/Pause
             </div>
         </div>
     );

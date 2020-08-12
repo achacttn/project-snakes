@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import style from './Row.module.css';
 import Square from './Square.jsx';
 
-const Row = ({ squares, rowPos }) => {
+const Row = ({ size, rowPos }) => {
 
     React.useEffect(()=>{
         console.log('=== Row component mounted ===');
@@ -11,7 +11,7 @@ const Row = ({ squares, rowPos }) => {
 
     const generateSquares = () => {
         let squareContainer = [];
-        for( let i=0; i<squares; i++ ){
+        for( let i=0; i<size; i++ ){
             squareContainer.push(<Square key={i} rowPos={rowPos} squarePos={i}/>)
         }
         return squareContainer;
@@ -27,8 +27,8 @@ const Row = ({ squares, rowPos }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { rows, squares } = state.board;
-    return { rows, squares };
+    let { size } = state.board;
+    return { size };
 }
 
 export default connect(

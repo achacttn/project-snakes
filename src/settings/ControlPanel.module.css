@@ -1,5 +1,50 @@
 .ControlPanelContainer {
     background-color: lightcoral;
     padding: 20px;
-    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.ControlPanelGridContainer {
+    max-width: 200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+        "score-label score-value"
+        "size-label size-value"
+        "tickrate-label tickrate-value"
+        "size-buttons size-buttons"
+        "state-buttons state-buttons"
+}
+
+.GridScoreLabel {
+    grid-area: score-label;
+}
+
+.GridScoreValue {
+    grid-area: score-value;
+}
+
+.GridSizeLabel {
+    grid-area: size-label;
+}
+
+.GridSizeValue {
+    grid-area: size-value;
+}
+
+.GridTickrateLabel {
+    grid-area: tickrate-label;
+}
+
+.GridTickrateValue {
+    grid-area: tickrate-value;
+}
+
+.GridSizeButtons {
+    grid-area: size-buttons;
+}
+
+.GridStateButtons {
+    grid-area: state-buttons;
 }
