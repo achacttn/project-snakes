@@ -1,7 +1,7 @@
 import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT, INCREASE_BOARD, DECREASE_BOARD } from '../actionTypes.js';
 
 const initialState = {
-    size    : 25,
+    size    : 20,
     rows    : 10,
     squares : 10,
 }
