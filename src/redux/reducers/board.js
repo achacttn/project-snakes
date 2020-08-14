@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export default ( state = initialState, action ) => {
-    switch (action.type) {
+    switch( action.type ){
         case INCREASE_BOARD:
             return Object.assign({}, state, {
                 size: ( state.size > 29 ? state.size : ++state.size )

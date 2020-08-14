@@ -14,7 +14,7 @@
         "size-label size-value"
         "tickrate-label tickrate-value"
         "size-buttons size-buttons"
-        "state-buttons state-buttons"
+        "state-button state-button"
 }
 
 .GridScoreLabel {
@@ -45,6 +45,6 @@
     grid-area: size-buttons;
 }
 
-.GridStateButtons {
-    grid-area: state-buttons;
+.GridStateButton {
+    grid-area: state-button;
 }

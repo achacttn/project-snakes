@@ -1,4 +1,4 @@
-import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT, INCREASE_BOARD, DECREASE_BOARD } from './actionTypes.js';
+import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT, INCREASE_BOARD, DECREASE_BOARD, TOGGLE_PLAY } from './actionTypes.js';
 
 let actionId = 0;
 
@@ -39,6 +39,13 @@ export const increaseBoard = () => ({
 
 export const decreaseBoard = () => ({
     type: DECREASE_BOARD,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const togglePlay = () => ({
+    type: TOGGLE_PLAY,
     payload: {
         id: ++actionId,
     }

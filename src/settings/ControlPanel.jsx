@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-const ControlPanel = ({ dispatch, size, rows, squares }) => {
+const ControlPanel = ({ dispatch, size, inProgress }) => {
     
     React.useEffect(()=>{
         console.log('=== ControlPanel.jsx mounted ===');
@@ -14,16 +14,15 @@ const ControlPanel = ({ dispatch, size, rows, squares }) => {
                 <div className={style.GridScoreLabel}>Score</div>
                 <div className={style.GridScoreValue}>score-value</div>
                 <div className={style.GridSizeLabel}>Size</div>
-                <div className={style.GridSizeValue}>{ size }</div>
+                <div className={style.GridSizeValue}>{ size.toString() }</div>
                 <div className={style.GridTickrateLabel}>Tickrate</div>
                 <div className={style.GridTickrateValue}>tickrate-value</div>
                 <div className={style.GridSizeButtons}>
                     <button onClick={() => dispatch({ type: "DECREASE_BOARD" })} disabled={true}>-</button>
                     <button onClick={() => dispatch({ type: "INCREASE_BOARD" })} disabled={true}>+</button>
                 </div>
-                <div className={style.GridStateButtons}>
-                    <button disabled={true}>Play</button>
-                    <button disabled={true}>Pause</button>
+                <div className={style.GridStateButton}>
+                    <button onClick={() => dispatch({ type: "TOGGLE_PLAY" })}>{( inProgress ? "Pause" : "Play" )}</button>
                 </div>
             </div>
         </div>
@@ -31,8 +30,9 @@ const ControlPanel = ({ dispatch, size, rows, squares }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { size, rows, squares } = state.board;
-    return { size, rows, squares };
+    let { size } = state.board;
+    let { inProgress } = state.gameState;
+    return { size, inProgress };
 };
 
 export default connect(
