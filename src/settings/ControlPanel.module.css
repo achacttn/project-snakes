@@ -13,6 +13,7 @@
         "score-label score-value"
         "size-label size-value"
         "tickrate-label tickrate-value"
+        "time-label time-value"
         "size-buttons size-buttons"
         "state-button state-button"
 }
@@ -39,6 +40,14 @@
 
 .GridTickrateValue {
     grid-area: tickrate-value;
+}
+
+.GridTimeElapsedLabel {
+    grid-area: time-label;
+}
+
+.GridTimeElapsedValue {
+    grid-area: time-value;
 }
 
 .GridSizeButtons {

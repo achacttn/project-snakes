@@ -5,9 +5,9 @@ import Row from './Row.jsx';
 
 const Board = ({ size }) => {
 
-    React.useEffect(()=>{
-        console.log('=== Board component mounted ===');
-    });
+    // React.useEffect(()=>{
+    //     console.log('=== Board component mounted ===');
+    // });
 
     const generateRows = () => {
         let rowContainer = [];

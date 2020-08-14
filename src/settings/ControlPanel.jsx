@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-const ControlPanel = ({ dispatch, size, inProgress }) => {
+const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
     
     React.useEffect(()=>{
         console.log('=== ControlPanel.jsx mounted ===');
@@ -17,6 +17,8 @@ const ControlPanel = ({ dispatch, size, inProgress }) => {
                 <div className={style.GridSizeValue}>{ size.toString() }</div>
                 <div className={style.GridTickrateLabel}>Tickrate</div>
                 <div className={style.GridTickrateValue}>tickrate-value</div>
+                <div className={style.GridTimeElapsedLabel}>Time</div>
+                <div className={style.GridTimeElapsedValue}>{ ticksElapsed.toString() }</div>
                 <div className={style.GridSizeButtons}>
                     <button onClick={() => dispatch({ type: "DECREASE_BOARD" })} disabled={true}>-</button>
                     <button onClick={() => dispatch({ type: "INCREASE_BOARD" })} disabled={true}>+</button>
@@ -31,8 +33,8 @@ const ControlPanel = ({ dispatch, size, inProgress }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress } = state.gameState;
-    return { size, inProgress };
+    let { inProgress, ticksElapsed } = state.gameState;
+    return { size, inProgress, ticksElapsed };
 };
 
 export default connect(

@@ -5,9 +5,9 @@ import Square from './Square.jsx';
 
 const Row = ({ size, rowPos }) => {
 
-    React.useEffect(()=>{
-        console.log('=== Row component mounted ===');
-    });
+    // React.useEffect(()=>{
+    //     console.log('=== Row component mounted ===');
+    // });
 
     const generateSquares = () => {
         let squareContainer = [];

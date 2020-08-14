@@ -6,3 +6,5 @@ export const INCREASE_BOARD     = "INCREASE_BOARD";
 export const DECREASE_BOARD     = "DECREASE_BOARD";
 
 export const TOGGLE_PLAY        = "TOGGLE_PLAY";
+export const CLOCK_RUN          = "CLOCK_RUN";
+export const CLOCK_STOP         = "CLOCK_STOP";
