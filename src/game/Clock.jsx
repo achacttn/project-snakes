@@ -7,11 +7,11 @@ const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
     intervalRef.current = inProgress;
 
     React.useEffect(() => {
-        console.log('=== Clock.jsx mounted ===');
-        console.log('inProgress outside setInterval closure: ', inProgress);
+        // console.log('=== Clock.jsx mounted ===');
+        // console.log('inProgress outside setInterval closure: ', inProgress);
         
         const progressTimer = setInterval(function(){
-            console.log('inProgress inside setInterval closure: ', inProgress);
+            // console.log('inProgress inside setInterval closure: ', inProgress);
             intervalRef.current ? dispatch({ type: "CLOCK_RUN" }) : clearInterval(progressTimer);
         // }, tickRate);
         }, 2000);

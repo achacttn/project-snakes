@@ -5,7 +5,7 @@ import style from './ControlPanel.module.css';
 const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
     
     React.useEffect(()=>{
-        console.log('=== ControlPanel.jsx mounted ===');
+        // console.log('=== ControlPanel.jsx mounted ===');
     });
     
     return (

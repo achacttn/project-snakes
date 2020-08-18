@@ -1,13 +1,7 @@
 # Project Snake
 
-### Changelog
+### Major bugs
 
-1.2
-- Redux
+### Minor bugs
 
-1.1
-- Actions are exclusive source for Store
-
-1.0
-- Layout wrapper component, styling
-- Board, Row, Square components
+- In Clock.jsx, inProgress variable is stale before component updates with intervalRef (stale variable can be seen by toggling state from "Play" to "Pause", the inProgress variable will be logged as true before component re-renders to false). Unsure if it will impact other parts of the app as of yet.

@@ -3,15 +3,24 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ size, inProgress }) => {
+const Board = ({ size, inProgress, ticksElapsed }) => {
 
-    // React.useEffect(()=>{
-    //     console.log('=== Board component mounted ===');
-    // });
+    // 1. attach controls
+
+    const gameStartIndicator = () => {
+        if (inProgress === true && ticksElapsed === 0) {
+            console.log('Game has JUST started');
+            // 2. generateBody and Food
+        } else {
+            console.log('Game has NOT just started');
+        }
+    }
+
+    // 3. Logic for snake growth
+
     React.useEffect(() => {
-        // console.log('Game is in play!: ')
-        console.log('Game inProgress? ', inProgress);
-    })
+        gameStartIndicator();
+    });
 
     const generateRows = () => {
         let rowContainer = [];
@@ -38,8 +47,8 @@ const Board = ({ size, inProgress }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress } = state.gameState;
-    return { size, inProgress };
+    let { inProgress, ticksElapsed } = state.gameState;
+    return { size, inProgress, ticksElapsed };
 };
 
 export default connect(

@@ -7,12 +7,19 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = () => {
+const App = ({ inProgress, ticksElapsed }) => {
 
-    React.useEffect(() => {
-        console.log('=== App.jsx mounted ===');
-        // console.log('App props: ', inProgress, ticksElapsed, tickRate);
-    });
+    // const gameStartIndicator = () => {
+    //     if( inProgress === true && ticksElapsed === 0 ){
+    //         console.log('Game has JUST started');
+    //     } else {
+    //         console.log('Game has NOT just started');
+    //     }
+    // }
+
+    // React.useEffect(() => {
+    //     gameStartIndicator();
+    // });
 
     return (
         <Wrapper>
@@ -25,13 +32,12 @@ const App = () => {
     );
 };
 
-// let mapStateToProps = ( state ) => {
-//     let { inProgress, ticksElapsed, tickRate } = state.gameState;
-//     return { inProgress, ticksElapsed, tickRate };
-// }
+let mapStateToProps = ( state ) => {
+    let { inProgress, ticksElapsed } = state.gameState;
+    return { inProgress, ticksElapsed };
+}
 
 export default connect(
-    null,
-    // mapStateToProps,
+    mapStateToProps,
     null,
 )(hot(module)(App));
