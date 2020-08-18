@@ -13,7 +13,7 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
             <div className={style.ControlPanelGridContainer}>
                 <div className={style.GridScoreLabel}>Score</div>
                 <div className={style.GridScoreValue}>score-value</div>
-                <div className={style.GridSizeLabel}>Size</div>
+                <div className={style.GridSizeLabel}>Board size</div>
                 <div className={style.GridSizeValue}>{ size.toString() }</div>
                 <div className={style.GridTickrateLabel}>Tickrate</div>
                 <div className={style.GridTickrateValue}>tickrate-value</div>

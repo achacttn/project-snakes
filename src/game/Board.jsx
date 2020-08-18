@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ size }) => {
+const Board = ({ size, inProgress }) => {
 
     // React.useEffect(()=>{
     //     console.log('=== Board component mounted ===');
     // });
+    React.useEffect(() => {
+        // console.log('Game is in play!: ')
+        console.log('Game inProgress? ', inProgress);
+    })
 
     const generateRows = () => {
         let rowContainer = [];
@@ -34,7 +38,8 @@ const Board = ({ size }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    return { size };
+    let { inProgress } = state.gameState;
+    return { size, inProgress };
 };
 
 export default connect(

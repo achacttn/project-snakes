@@ -7,11 +7,11 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = ({ inProgress, ticksElapsed, tickRate }) => {
+const App = () => {
 
     React.useEffect(() => {
         console.log('=== App.jsx mounted ===');
-        console.log('App props: ', inProgress, ticksElapsed, tickRate);
+        // console.log('App props: ', inProgress, ticksElapsed, tickRate);
     });
 
     return (
@@ -25,12 +25,13 @@ const App = ({ inProgress, ticksElapsed, tickRate }) => {
     );
 };
 
-let mapStateToProps = ( state ) => {
-    let { inProgress, ticksElapsed, tickRate } = state.gameState;
-    return { inProgress, ticksElapsed, tickRate };
-}
+// let mapStateToProps = ( state ) => {
+//     let { inProgress, ticksElapsed, tickRate } = state.gameState;
+//     return { inProgress, ticksElapsed, tickRate };
+// }
 
 export default connect(
-    mapStateToProps,
+    null,
+    // mapStateToProps,
     null,
 )(hot(module)(App));

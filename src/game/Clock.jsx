@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 
 const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
 
+    let intervalRef = React.useRef();
+    intervalRef.current = inProgress;
+
     React.useEffect(() => {
         console.log('=== Clock.jsx mounted ===');
-        console.log('Clock props: ', inProgress, ticksElapsed, tickRate);
-
+        console.log('inProgress outside setInterval closure: ', inProgress);
+        
         const progressTimer = setInterval(function(){
-            inProgress ? dispatch({ type: "CLOCK_RUN" }) : clearInterval(progressTimer);
-        }, tickRate)
+            console.log('inProgress inside setInterval closure: ', inProgress);
+            intervalRef.current ? dispatch({ type: "CLOCK_RUN" }) : clearInterval(progressTimer);
+        // }, tickRate);
+        }, 2000);
 
     }, [inProgress]);
 
