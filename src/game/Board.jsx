@@ -36,9 +36,7 @@ const Board = ({ size, inProgress, ticksElapsed }) => {
         <div className={style.BoardContainer}>
             <div className={style.BoardEdge}>
                 <div className={style.GameBoard}>
-                    {
-                        generateRows()
-                    }
+                    { generateRows() }
                 </div>
             </div>
         </div>
@@ -55,3 +53,4 @@ export default connect(
     mapStateToProps,
     null,
 )(Board);
+

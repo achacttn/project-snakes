@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
 
-    let intervalRef = React.useRef();
+    let intervalRef = React.useRef(null);
     intervalRef.current = inProgress;
 
     React.useEffect(() => {
