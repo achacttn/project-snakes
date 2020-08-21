@@ -7,15 +7,28 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = ({ inProgress, ticksElapsed }) => {
+const App = ({ dispatch, inProgress, ticksElapsed }) => {
 
     const containerRef = React.useRef(null);
 
     const keyPressHandler = event => {
         event.preventDefault();
-        console.log('keypress event: ', event);
-        // check which property to use to detect up down left right
-        // dispatch events to change direction
+        switch( event.keyCode ){
+            case 37:
+                dispatch({ type: "DIRECTION_LEFT" });
+                return null;
+            case 38:
+                dispatch({ type: "DIRECTION_UP" });
+                return null;
+            case 39:
+                dispatch({ type: "DIRECTION_RIGHT" });
+                return null;
+            case 40:
+                dispatch({ type: "DIRECTION_DOWN" });
+                return null;
+            default:
+                break;
+        }
     };
 
     React.useEffect(() => {

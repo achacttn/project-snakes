@@ -1,44 +1,16 @@
 import {
-    ROW_ADD,
-    ROW_SUBTRACT,
-    SQUARE_ADD,
-    SQUARE_SUBTRACT,
     INCREASE_BOARD,
     DECREASE_BOARD,
+    MATERIALIZE_SNAKE,
     TOGGLE_PLAY,
     CLOCK_RUN,
-    CLOCK_STOP,
+    DIRECTION_UP,
+    DIRECTION_DOWN,
+    DIRECTION_LEFT,
+    DIRECTION_RIGHT,
 } from './actionTypes.js';
 
 let actionId = 0;
-
-export const addRow = () => ({
-    type: ROW_ADD,
-    payload: {
-        id: ++actionId,
-    }
-});
-
-export const subtractRow = () => ({
-    type: ROW_SUBTRACT,
-    payload: {
-        id: ++actionId,
-    }
-});
-
-export const addSquare = () => ({
-    type: SQUARE_ADD,
-    payload: {
-        id: ++actionId,
-    }
-});
-
-export const subtractSquare = () => ({
-    type: SQUARE_SUBTRACT,
-    payload: {
-        id: ++actionId,
-    }
-});
 
 export const increaseBoard = () => ({
     type: INCREASE_BOARD,
@@ -52,6 +24,15 @@ export const decreaseBoard = () => ({
     payload: {
         id: ++actionId,
     }
+});
+
+export const materializeSnake = (xCoordinate, yCoordinate) => ({
+    type: MATERIALIZE_SNAKE,
+    payload: {
+        id  : ++actionId,
+        x   : xCoordinate,
+        y   : yCoordinate,
+    },
 });
 
 export const togglePlay = () => ({
@@ -68,8 +49,36 @@ export const clockRun = () => ({
     }
 });
 
-export const clockStop = () => ({
-    type: CLOCK_STOP,
+// export const clockStop = () => ({
+//     type: CLOCK_STOP,
+//     payload: {
+//         id: ++actionId,
+//     }
+// });
+
+export const directionUp = () => ({
+    type: DIRECTION_UP,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const directionDown = () => ({
+    type: DIRECTION_DOWN,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const directionLeft = () => ({
+    type: DIRECTION_LEFT,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const directionRight = () => ({
+    type: DIRECTION_RIGHT,
     payload: {
         id: ++actionId,
     }

@@ -1,10 +1,14 @@
-import { ROW_ADD, ROW_SUBTRACT, SQUARE_ADD, SQUARE_SUBTRACT, INCREASE_BOARD, DECREASE_BOARD } from '../actionTypes.js';
+import {
+    INCREASE_BOARD,
+    DECREASE_BOARD,
+    // MATERIALIZE_SNAKE,
+} from '../actionTypes.js';
 
 const initialState = {
-    size    : 20,
-    rows    : 10,
-    squares : 10,
-}
+    size        : 20,
+    snakeBody   : [],
+    snakeFood   : [],
+};
 
 export default ( state = initialState, action ) => {
     switch( action.type ){
@@ -16,23 +20,11 @@ export default ( state = initialState, action ) => {
             return Object.assign({}, state, {
                 size: ( state.size < 21 ? state.size : --state.size )
             });
-        case ROW_ADD:
-            return Object.assign({}, state, {
-                rows: ( state.rows > 19 ? state.rows : ++state.rows )
-            });
-        case ROW_SUBTRACT:
-            return Object.assign({}, state, {
-                rows: ( state.rows < 11 ? state.rows : --state.rows )
-            });
-        case SQUARE_ADD:
-            return Object.assign({}, state, {
-                squares: ( state.squares > 19 ? state.squares : ++state.squares )
-            });
-        case SQUARE_SUBTRACT:
-            return Object.assign({}, state, {
-                squares: ( state.squares < 11 ? state.squares : --state.squares )
-            });
+        // case MATERIALIZE_SNAKE:
+        //     return Object.assign({}, state, {
+
+        //     })
         default:
-            return Object.assign({}, state)
+            return Object.assign({}, state);
     }
 };

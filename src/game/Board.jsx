@@ -3,24 +3,40 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ size, inProgress, ticksElapsed }) => {
+const Board = ({ dispatch, size, inProgress, ticksElapsed }) => {
 
-    // 1. attach controls
+    const initializeSnake = async () => {
+        try {
+            let xCoord = await Math.floor( Math.random() * size );
+            let yCoord = await Math.floor( Math.random() * size );
+            console.log(`Initializing snake at x:${xCoord}, y:${yCoord}`);
+            await dispatch({ type: "MATERIALIZE_SNAKE", x: xCoord, y: yCoord });
+            // 1. fix dispatch
+            // 2. visual indicator in Row.jsx or Square.jsx of snake-occupied space
+        } catch (error) {
+            console.log('Error in initializeSnake: ', error);
+        }
 
-    const gameStartIndicator = () => {
-        if (inProgress === true && ticksElapsed === 0) {
-            console.log('Game has JUST started');
-            // 2. generateBody and Food
-        } else {
-            console.log('Game has NOT just started');
+    }
+
+    const generateFood = () => {
+        console.log('Food generated!');
+    }
+
+    const gameStartIndicator = async () => {
+        try {
+            if (inProgress === true && ticksElapsed === 0) {
+                await initializeSnake();
+                await generateFood();
+            }
+        } catch (error) {
+            console.log('Error in gameStartIndicator: ', error);
         }
     }
 
-    // 3. Logic for snake growth
-
     React.useEffect(() => {
         gameStartIndicator();
-    });
+    }, [inProgress, ticksElapsed]);
 
     const generateRows = () => {
         let rowContainer = [];

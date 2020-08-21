@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import style from './Row.module.css';
 import Square from './Square.jsx';
 
-const Row = ({ size, rowPos }) => {
+const Row = ({ size, rowPos, snakeBody }) => {
 
-    // React.useEffect(()=>{
-    //     console.log('=== Row component mounted ===');
-    // });
+    // let [ xCoord, yCoord ] = snakeBody[0];
+
+    React.useEffect(()=>{
+        console.log('=== Row component mounted ===');
+        console.log('snakeBody props: ', snakeBody);
+    });
 
     const generateSquares = () => {
         let squareContainer = [];
@@ -28,7 +31,8 @@ const Row = ({ size, rowPos }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    return { size };
+    let { snakeBody } = state.dynamics;
+    return { size, snakeBody };
 }
 
 export default connect(

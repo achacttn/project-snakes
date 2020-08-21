@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
+const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction }) => {
+    
+    // display direction to check
     
     React.useEffect(()=>{
         // console.log('=== ControlPanel.jsx mounted ===');
@@ -19,6 +21,8 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
                 <div className={style.GridTickrateValue}>tickrate-value</div>
                 <div className={style.GridTimeElapsedLabel}>Time</div>
                 <div className={style.GridTimeElapsedValue}>{ ticksElapsed.toString() }</div>
+                <div className={style.GridDirectionLabel}>Direction</div>
+                <div className={style.GridDirectionValue}>{ direction }</div>
                 <div className={style.GridSizeButtons}>
                     <button onClick={() => dispatch({ type: "DECREASE_BOARD" })} disabled={true}>-</button>
                     <button onClick={() => dispatch({ type: "INCREASE_BOARD" })} disabled={true}>+</button>
@@ -33,8 +37,8 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress, ticksElapsed } = state.gameState;
-    return { size, inProgress, ticksElapsed };
+    let { inProgress, ticksElapsed, direction } = state.gameState;
+    return { size, inProgress, ticksElapsed, direction };
 };
 
 export default connect(
