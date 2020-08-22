@@ -3,25 +3,21 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ dispatch, size, inProgress, ticksElapsed }) => {
+const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
 
     const initializeSnake = async () => {
         try {
             let xCoord = await Math.floor( Math.random() * size );
             let yCoord = await Math.floor( Math.random() * size );
-            console.log(`Initializing snake at x:${xCoord}, y:${yCoord}`);
-            await dispatch({ type: "MATERIALIZE_SNAKE", x: xCoord, y: yCoord });
-            // 1. fix dispatch
-            // 2. visual indicator in Row.jsx or Square.jsx of snake-occupied space
+            await dispatch({ type: "MATERIALIZE_SNAKE", xCoord: xCoord, yCoord: yCoord });
         } catch (error) {
             console.log('Error in initializeSnake: ', error);
         }
-
-    }
+    };
 
     const generateFood = () => {
         console.log('Food generated!');
-    }
+    };
 
     const gameStartIndicator = async () => {
         try {
@@ -32,13 +28,15 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed }) => {
         } catch (error) {
             console.log('Error in gameStartIndicator: ', error);
         }
-    }
+    };
 
     React.useEffect(() => {
         gameStartIndicator();
     }, [inProgress, ticksElapsed]);
 
     const generateRows = () => {
+        // 1. loop through snakeBody array to pass information about snake body containing rows
+        // 2. only snakebody containing rows can check to see whether they have snakebody containing squares
         let rowContainer = [];
         for( let i=0; i<size; i++ ){
             rowContainer.push(
@@ -62,7 +60,8 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed }) => {
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
     let { inProgress, ticksElapsed } = state.gameState;
-    return { size, inProgress, ticksElapsed };
+    let { snakeBody } = state.dynamics;
+    return { size, inProgress, ticksElapsed, snakeBody };
 };
 
 export default connect(

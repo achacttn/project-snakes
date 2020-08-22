@@ -29,9 +29,9 @@ export const decreaseBoard = () => ({
 export const materializeSnake = (xCoordinate, yCoordinate) => ({
     type: MATERIALIZE_SNAKE,
     payload: {
-        id  : ++actionId,
-        x   : xCoordinate,
-        y   : yCoordinate,
+        id      : ++actionId,
+        xCoord  : xCoordinate,
+        yCoord  : yCoordinate,
     },
 });
 

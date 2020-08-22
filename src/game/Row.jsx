@@ -8,8 +8,8 @@ const Row = ({ size, rowPos, snakeBody }) => {
     // let [ xCoord, yCoord ] = snakeBody[0];
 
     React.useEffect(()=>{
-        console.log('=== Row component mounted ===');
-        console.log('snakeBody props: ', snakeBody);
+        // console.log('=== Row component mounted ===');
+        // console.log('snakeBody props: ', snakeBody);
     });
 
     const generateSquares = () => {
