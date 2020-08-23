@@ -35,6 +35,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
     }, [inProgress, ticksElapsed]);
 
     const generateRows = () => {
+        console.log('Generating rows with snakeBody info: ', snakeBody);
         // 1. loop through snakeBody array to pass information about snake body containing rows
         // 2. only snakebody containing rows can check to see whether they have snakebody containing squares
         let rowContainer = [];
