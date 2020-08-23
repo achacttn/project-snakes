@@ -6,8 +6,8 @@ import {
 
 const initialState = {
     size        : 20,
-    snakeBody   : [],
-    snakeFood   : [],
+    // snakeBody   : [],
+    // snakeFood   : [],
 };
 
 export default ( state = initialState, action ) => {

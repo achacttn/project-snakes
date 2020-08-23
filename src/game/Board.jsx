@@ -23,7 +23,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
         try {
             if (inProgress === true && ticksElapsed === 0) {
                 await initializeSnake();
-                await generateFood();
+                // await generateFood();
             }
         } catch (error) {
             console.log('Error in gameStartIndicator: ', error);
@@ -35,13 +35,21 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
     }, [inProgress, ticksElapsed]);
 
     const generateRows = () => {
-        console.log('Generating rows with snakeBody info: ', snakeBody);
-        // 1. loop through snakeBody array to pass information about snake body containing rows
-        // 2. only snakebody containing rows can check to see whether they have snakebody containing squares
+        let xSet    = new Set();
+        let ySet    = new Set();
+        for( let i=0; i<snakeBody.length; i++ ){
+            xSet.add(snakeBody[i][0]);
+            ySet.add(snakeBody[i][1]);
+        }
+        // console.log('Generating rows with snakeBody info: ', snakeBody);
         let rowContainer = [];
-        for( let i=0; i<size; i++ ){
+        for( let j=0; j<size; j++ ){
             rowContainer.push(
-                <Row key={i} rowPos={i}/>
+                <Row
+                    key={j}
+                    rowPos={j}
+                    xSet={ySet && ySet.has(j) ? xSet : null}
+                />
             )
         }
         return rowContainer;
@@ -60,8 +68,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress, ticksElapsed } = state.gameState;
-    let { snakeBody } = state.dynamics;
+    let { inProgress, ticksElapsed, snakeBody } = state.gameState;
     return { size, inProgress, ticksElapsed, snakeBody };
 };
 

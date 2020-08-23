@@ -10,3 +10,5 @@ export const DIRECTION_UP       = "DIRECTION_UP";
 export const DIRECTION_DOWN     = "DIRECTION_DOWN";
 export const DIRECTION_LEFT     = "DIRECTION_LEFT";
 export const DIRECTION_RIGHT    = "DIRECTION_RIGHT";
+
+export const MOVE_SNAKE         = "MOVE_SNAKE";

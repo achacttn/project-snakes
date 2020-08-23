@@ -1,20 +1,22 @@
 import React from 'react';
 import style from './Square.module.css';
 
-export default ({ rowPos, squarePos }) => {
+export default ({ snakeOccupied, rowPos, squarePos }) => {
 
     React.useEffect(() => {
-        // console.log('=== Square component mounted ===');
-        // console.log('Square component props: ', rowPos, squarePos);
+        if( snakeOccupied ){
+            console.log(`Square at column(x):${squarePos} and row(y):${rowPos}`);
+        }
     });
 
     const squareClickHandler = () => {
-        console.log(`x:${rowPos}, y:${squarePos}`);
+        console.log(`x:${squarePos}, y:${rowPos}`);
     }
 
     return (
         <div className={style.SquareContainer} onClick={squareClickHandler}>
-            &nbsp;
+            <div className={snakeOccupied ? style.SnakeOccupied : null}></div>
+            {/* &nbsp; */}
         </div>
     )
 };

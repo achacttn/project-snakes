@@ -8,6 +8,7 @@ import {
     DIRECTION_DOWN,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
+    MOVE_SNAKE,
 } from './actionTypes.js';
 
 let actionId = 0;
@@ -49,13 +50,6 @@ export const clockRun = () => ({
     }
 });
 
-// export const clockStop = () => ({
-//     type: CLOCK_STOP,
-//     payload: {
-//         id: ++actionId,
-//     }
-// });
-
 export const directionUp = () => ({
     type: DIRECTION_UP,
     payload: {
@@ -79,6 +73,13 @@ export const directionLeft = () => ({
 
 export const directionRight = () => ({
     type: DIRECTION_RIGHT,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const moveSnake = () => ({
+    type: MOVE_SNAKE,
     payload: {
         id: ++actionId,
     }

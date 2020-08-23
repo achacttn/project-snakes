@@ -1,5 +1,5 @@
 .RowContainer {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     flex: 1 0 0;
 }

@@ -12,9 +12,12 @@ const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
         
         const progressTimer = setInterval(function(){
             // console.log('inProgress inside setInterval closure: ', inProgress);
-            intervalRef.current ? dispatch({ type: "CLOCK_RUN" }) : clearInterval(progressTimer);
+            intervalRef.current ? 
+            dispatch({ type: "MOVE_SNAKE" })
+            // dispatch({ type: "CLOCK_RUN" })
+            : clearInterval(progressTimer);
         // }, tickRate);
-        }, 2000);
+        }, 1000);
 
     }, [inProgress]);
 

@@ -4,11 +4,9 @@ import style from './ControlPanel.module.css';
 
 const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction }) => {
     
-    // display direction to check
-    
-    React.useEffect(()=>{
-        // console.log('=== ControlPanel.jsx mounted ===');
-    });
+    // React.useEffect(()=>{
+    //     console.log('=== ControlPanel.jsx mounted ===');
+    // });
     
     return (
         <div className={style.ControlPanelContainer}>

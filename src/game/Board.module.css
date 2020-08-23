@@ -22,5 +22,5 @@
     min-height: 1200px;
     height: 100%;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
 }
