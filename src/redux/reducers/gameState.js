@@ -29,7 +29,7 @@ export default ( state = initialState, action ) => {
             });
         case CLOCK_RUN:
             return Object.assign({}, state, {
-                ticksElapsed: ++state.ticksElapsed,
+                ticksElapsed: state.ticksElapsed+1,
             });
         case DIRECTION_UP:
             return Object.assign({}, state, {
@@ -52,18 +52,50 @@ export default ( state = initialState, action ) => {
                 snakeBody: [[action.xCoord, action.yCoord]],
             });
         case MOVE_SNAKE:
-            console.log('MOVE_SNAKE reducer snakeBody: ', state.snakeBody);
+            console.log('MOVE_SNAKE reducer direction: ', state.direction);
             let newPosition = [];
-            for( let i=0; i<state.snakeBody.length; i++ ){
-                let [ segmentX, segmentY ] = state.snakeBody[i];
-                console.log('segmentX: ', segmentX, 'segmentY: ', segmentY);
-                newPosition.push([ segmentX+1 % 19, segmentY ]);
-            };
-            console.log('gameState reducer, moving snake to: ', newPosition);
-            return Object.assign({}, state, {
-                snakeBody: newPosition,
-                ticksElapsed: ++state.ticksElapsed,
-            });
+
+            switch( state.direction ){
+                case "UP":
+                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (20+segmentY-1)%20 ] );
+                    return Object.assign({}, state, {
+                        snakeBody: newPosition,
+                        ticksElapsed: state.ticksElapsed+1,
+                    });
+                case "DOWN":
+                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (segmentY+1)%20 ] );
+                    return Object.assign({}, state, {
+                        snakeBody: newPosition,
+                        ticksElapsed: state.ticksElapsed+1,
+                    });
+                case "LEFT":
+                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (20+segmentX-1)%20, segmentY ] );
+                    return Object.assign({}, state, {
+                        snakeBody: newPosition,
+                        ticksElapsed: state.ticksElapsed+1,
+                    });
+                case "RIGHT":
+                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (segmentX+1)%20, segmentY ] );
+                    return Object.assign({}, state, {
+                        snakeBody: newPosition,
+                        ticksElapsed: state.ticksElapsed+1,
+                    });
+                default:
+                    break;
+            }
+
+            // for( let i=0; i<state.snakeBody.length; i++ ){
+            //     let [ segmentX, segmentY ] = state.snakeBody[i];
+            //     let newSegmentX = (segmentX+1)%20;
+            //     newPosition.push([ newSegmentX, segmentY ]);
+            // };
+
+            // let newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (segmentX+1)%20, segmentY ]);
+
+            // return Object.assign({}, state, {
+            //     snakeBody: newPosition,
+            //     ticksElapsed: ++state.ticksElapsed,
+            // });
         default:
             return Object.assign({}, state);
     }

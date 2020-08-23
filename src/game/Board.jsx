@@ -41,7 +41,6 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
             xSet.add(snakeBody[i][0]);
             ySet.add(snakeBody[i][1]);
         }
-        // console.log('Generating rows with snakeBody info: ', snakeBody);
         let rowContainer = [];
         for( let j=0; j<size; j++ ){
             rowContainer.push(

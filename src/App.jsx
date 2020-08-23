@@ -7,7 +7,7 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = ({ dispatch, inProgress, ticksElapsed }) => {
+const App = ({ dispatch, inProgress, ticksElapsed, direction }) => {
 
     const containerRef = React.useRef(null);
 
@@ -15,16 +15,16 @@ const App = ({ dispatch, inProgress, ticksElapsed }) => {
         event.preventDefault();
         switch( event.keyCode ){
             case 37:
-                dispatch({ type: "DIRECTION_LEFT" });
+                if( direction !== "RIGHT" ){ dispatch({ type: "DIRECTION_LEFT" })};
                 return null;
             case 38:
-                dispatch({ type: "DIRECTION_UP" });
+                if( direction !== "DOWN" ){ dispatch({ type: "DIRECTION_UP" })}
                 return null;
             case 39:
-                dispatch({ type: "DIRECTION_RIGHT" });
+                if( direction !== "LEFt" ){ dispatch({ type: "DIRECTION_RIGHT" })};
                 return null;
             case 40:
-                dispatch({ type: "DIRECTION_DOWN" });
+                if( direction !== "UP" ){ dispatch({ type: "DIRECTION_DOWN" })};
                 return null;
             default:
                 break;
@@ -33,24 +33,12 @@ const App = ({ dispatch, inProgress, ticksElapsed }) => {
 
     React.useEffect(() => {
         containerRef.current.focus();
-    })
-
-    // const gameStartIndicator = () => {
-    //     if( inProgress === true && ticksElapsed === 0 ){
-    //         console.log('Game has JUST started');
-    //     } else {
-    //         console.log('Game has NOT just started');
-    //     }
-    // }
-
-    // React.useEffect(() => {
-    //     gameStartIndicator();
-    // });
+    });
 
     return (
         <Wrapper>
             <div className={style.AppContainer} onKeyDown={keyPressHandler} ref={containerRef} tabIndex={-1}>
-                <Clock/>
+                <Clock />
                 <ControlPanel />
                 <Board />
             </div>
@@ -59,8 +47,8 @@ const App = ({ dispatch, inProgress, ticksElapsed }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { inProgress, ticksElapsed } = state.gameState;
-    return { inProgress, ticksElapsed };
+    let { inProgress, ticksElapsed, direction } = state.gameState;
+    return { inProgress, ticksElapsed, direction };
 }
 
 export default connect(
