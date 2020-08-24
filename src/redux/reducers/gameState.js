@@ -8,6 +8,7 @@ import {
 
     MATERIALIZE_SNAKE,
     MOVE_SNAKE,
+    GENERATE_FOOD,
 } from '../actionTypes.js';
 
 const initialState = {
@@ -52,9 +53,7 @@ export default ( state = initialState, action ) => {
                 snakeBody: [[action.xCoord, action.yCoord]],
             });
         case MOVE_SNAKE:
-            console.log('MOVE_SNAKE reducer direction: ', state.direction);
             let newPosition = [];
-
             switch( state.direction ){
                 case "UP":
                     newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (20+segmentY-1)%20 ] );
@@ -83,19 +82,8 @@ export default ( state = initialState, action ) => {
                 default:
                     break;
             }
-
-            // for( let i=0; i<state.snakeBody.length; i++ ){
-            //     let [ segmentX, segmentY ] = state.snakeBody[i];
-            //     let newSegmentX = (segmentX+1)%20;
-            //     newPosition.push([ newSegmentX, segmentY ]);
-            // };
-
-            // let newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (segmentX+1)%20, segmentY ]);
-
-            // return Object.assign({}, state, {
-            //     snakeBody: newPosition,
-            //     ticksElapsed: ++state.ticksElapsed,
-            // });
+            break;
+        case GENERATE_FOOD:
         default:
             return Object.assign({}, state);
     }

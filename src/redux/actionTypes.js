@@ -12,3 +12,4 @@ export const DIRECTION_LEFT     = "DIRECTION_LEFT";
 export const DIRECTION_RIGHT    = "DIRECTION_RIGHT";
 
 export const MOVE_SNAKE         = "MOVE_SNAKE";
+export const GENERATE_FOOD      = "GENERATE_FOOD";

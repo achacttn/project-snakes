@@ -9,6 +9,7 @@ import {
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
     MOVE_SNAKE,
+    GENERATE_FOOD,
 } from './actionTypes.js';
 
 let actionId = 0;
@@ -80,6 +81,13 @@ export const directionRight = () => ({
 
 export const moveSnake = () => ({
     type: MOVE_SNAKE,
+    payload: {
+        id: ++actionId,
+    }
+});
+
+export const generateFood = () => ({
+    type: GENERATE_FOOD,
     payload: {
         id: ++actionId,
     }

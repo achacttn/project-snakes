@@ -21,7 +21,7 @@ const App = ({ dispatch, inProgress, ticksElapsed, direction }) => {
                 if( direction !== "DOWN" ){ dispatch({ type: "DIRECTION_UP" })}
                 return null;
             case 39:
-                if( direction !== "LEFt" ){ dispatch({ type: "DIRECTION_RIGHT" })};
+                if( direction !== "LEFT" ){ dispatch({ type: "DIRECTION_RIGHT" })};
                 return null;
             case 40:
                 if( direction !== "UP" ){ dispatch({ type: "DIRECTION_DOWN" })};

@@ -15,15 +15,23 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
         }
     };
 
-    const generateFood = () => {
-        console.log('Food generated!');
+    const generateFood = async () => {
+        try {
+            // 1. call coordinate generator (attempt)
+            // 2. if intersection with snake body segment, generate again
+            // 3. if no intersection, dispatch action
+            let foodX = await Math.floor( Math.random() * size );
+            let foodY = await Math.floor( Math.random() * size );
+        } catch (error) {
+            console.log('Error in generateFood: ', error);
+        }
     };
 
     const gameStartIndicator = async () => {
         try {
             if (inProgress === true && ticksElapsed === 0) {
                 await initializeSnake();
-                // await generateFood();
+                await generateFood();
             }
         } catch (error) {
             console.log('Error in gameStartIndicator: ', error);
