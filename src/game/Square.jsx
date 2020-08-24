@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Square.module.css';
 
-export default ({ snakeOccupied, rowPos, squarePos }) => {
+export default ({ snakeOccupied, foodOccupied, rowPos, squarePos }) => {
 
     React.useEffect(() => {
         if( snakeOccupied ){
@@ -15,7 +15,7 @@ export default ({ snakeOccupied, rowPos, squarePos }) => {
 
     return (
         <div className={style.SquareContainer} onClick={squareClickHandler}>
-            <div className={snakeOccupied ? style.SnakeOccupied : null}></div>
+            <div className={snakeOccupied ? style.SnakeOccupied : ( foodOccupied ? style.FoodOccupied : null )}></div>
             {/* &nbsp; */}
         </div>
     )

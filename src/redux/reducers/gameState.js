@@ -84,6 +84,9 @@ export default ( state = initialState, action ) => {
             }
             break;
         case GENERATE_FOOD:
+            return Object.assign({}, state, {
+                snakeFood: [action.foodX, action.foodY]
+            })
         default:
             return Object.assign({}, state);
     }

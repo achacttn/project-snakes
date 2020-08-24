@@ -86,9 +86,11 @@ export const moveSnake = () => ({
     }
 });
 
-export const generateFood = () => ({
+export const generateFood = (foodX, foodY) => ({
     type: GENERATE_FOOD,
     payload: {
-        id: ++actionId,
+        id      : ++actionId,
+        foodX   : foodX,
+        foodY   : foodY,
     }
 });

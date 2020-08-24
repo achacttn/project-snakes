@@ -3,43 +3,31 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
+const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood }) => {
 
-    const initializeSnake = async () => {
-        try {
-            let xCoord = await Math.floor( Math.random() * size );
-            let yCoord = await Math.floor( Math.random() * size );
-            await dispatch({ type: "MATERIALIZE_SNAKE", xCoord: xCoord, yCoord: yCoord });
-        } catch (error) {
-            console.log('Error in initializeSnake: ', error);
-        }
-    };
-
-    const generateFood = async () => {
-        try {
-            // 1. call coordinate generator (attempt)
-            // 2. if intersection with snake body segment, generate again
-            // 3. if no intersection, dispatch action
-            let foodX = await Math.floor( Math.random() * size );
-            let foodY = await Math.floor( Math.random() * size );
-        } catch (error) {
-            console.log('Error in generateFood: ', error);
-        }
-    };
-
-    const gameStartIndicator = async () => {
-        try {
-            if (inProgress === true && ticksElapsed === 0) {
-                await initializeSnake();
-                await generateFood();
-            }
-        } catch (error) {
-            console.log('Error in gameStartIndicator: ', error);
-        }
+    const generateCoords = () => {
+        let xCoord = Math.floor( Math.random() * size );
+        let yCoord = Math.floor( Math.random() * size );
+        return { xCoord, yCoord };
     };
 
     React.useEffect(() => {
-        gameStartIndicator();
+        if( inProgress && ( snakeFood.length === 0 )){
+            let newFood = Object.values(generateCoords());
+            let snakeBodyHash = {};
+            snakeBody.map(( segment, index ) => snakeBodyHash[segment] = index);
+            while( snakeBodyHash.hasOwnProperty(newFood) ){
+                newFood = Object.values(generateCoords());
+            }
+            dispatch({ type: "GENERATE_FOOD", foodX: newFood[0], foodY: newFood[1] });
+        }
+    }, [ticksElapsed, snakeFood, snakeBody]);
+
+    React.useEffect(() => {
+        if( inProgress && ( ticksElapsed === 0 )){
+            let coords = generateCoords();
+            dispatch({ type: "MATERIALIZE_SNAKE", ...coords });
+        }
     }, [inProgress, ticksElapsed]);
 
     const generateRows = () => {
@@ -49,6 +37,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
             xSet.add(snakeBody[i][0]);
             ySet.add(snakeBody[i][1]);
         }
+        let [ xFoodCoord, yFoodCoord ] = snakeFood;
         let rowContainer = [];
         for( let j=0; j<size; j++ ){
             rowContainer.push(
@@ -56,6 +45,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
                     key={j}
                     rowPos={j}
                     xSet={ySet && ySet.has(j) ? xSet : null}
+                    xFoodCoord={yFoodCoord && yFoodCoord === j ? xFoodCoord : null}
                 />
             )
         }
@@ -75,8 +65,8 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress, ticksElapsed, snakeBody } = state.gameState;
-    return { size, inProgress, ticksElapsed, snakeBody };
+    let { inProgress, ticksElapsed, snakeBody, snakeFood } = state.gameState;
+    return { size, inProgress, ticksElapsed, snakeBody, snakeFood };
 };
 
 export default connect(

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import style from './Row.module.css';
 import Square from './Square.jsx';
 
-const Row = ({ xSet, size, rowPos, snakeBody }) => {
+const Row = ({ xSet, xFoodCoord, size, rowPos, snakeBody }) => {
 
     // React.useEffect(()=>{
     //     console.log('=== Row component mounted ===');
@@ -19,6 +19,7 @@ const Row = ({ xSet, size, rowPos, snakeBody }) => {
                     rowPos={rowPos}
                     squarePos={i}
                     snakeOccupied={xSet && xSet.has(i) ? true : false}
+                    foodOccupied={xFoodCoord && xFoodCoord === i ? true : false}
                 />
             )
         }
