@@ -1,24 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
+const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
 
     let intervalRef = React.useRef(null);
     intervalRef.current = inProgress;
 
-    // React.useEffect(() => {
-    //     // console.log('=== Clock.jsx mounted ===');
-    //     const progressTimer = setInterval(function(){
-    //         intervalRef.current ? 
-    //         dispatch({ type: "MOVE_SNAKE" }) : clearInterval(progressTimer);
-    //     // }, tickRate);
-    //     }, 1000);
-    // }, [inProgress]);
+    // might not need these refs
+    // let directionRef = React.useRef(null);
+    // directionRef.current = direction;
+    // let snakeBodyRef = React.useRef(null);
+    // snakeBodyRef.current = snakeBody;
+    // let snakeFoodRef = React.useRef(null);
+    // snakeFoodRef.current = snakeFood;
 
     React.useEffect(() => {
+        console.log('Clock component')
+        // console.log('inProgress redux state & ref: ', inProgress, intervalRef.current);
+        // console.log('direction redux state & ref: ', direction, directionRef.current);
+        // console.log('snakeBody redux state & ref: ', snakeBody, snakeBodyRef.current);
+        // console.log('snakeFood redux state & ref: ', snakeFood, snakeFoodRef.current);
         const progressTimer = setInterval(function(){
             if( intervalRef.current ){
-                dispatch({ type: "MOVE_SNAKE" })
+                // detect collision type
+                // food: move the snake, grow the snake, and generate different food
+                // snake: kill the snake, end the game
+                // none: dispatch({ type: "MOVE_SNAKE" })
+                dispatch({ type: "MOVE_SNAKE" });
             } else {
                 clearInterval(progressTimer);
             }
@@ -31,8 +39,8 @@ const Clock = ({ dispatch, inProgress, ticksElapsed, tickRate }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { inProgress, ticksElapsed, tickRate } = state.gameState;
-    return { inProgress, ticksElapsed, tickRate };
+    let { inProgress, direction, snakeBody, snakeFood } = state.gameState;
+    return { inProgress, direction, snakeBody, snakeFood };
 }
 
 export default connect(
