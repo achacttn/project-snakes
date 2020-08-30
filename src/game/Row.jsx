@@ -19,7 +19,7 @@ const Row = ({ xSet, xFoodCoord, size, rowPos, snakeBody }) => {
                     rowPos={rowPos}
                     squarePos={i}
                     snakeOccupied={xSet && xSet.has(i) ? true : false}
-                    foodOccupied={xFoodCoord && xFoodCoord === i ? true : false}
+                    foodOccupied={( xFoodCoord !== undefined ) && xFoodCoord === i ? true : false}
                 />
             )
         }

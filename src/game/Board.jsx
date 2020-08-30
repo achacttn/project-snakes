@@ -14,14 +14,17 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood 
     React.useEffect(() => {
         if( inProgress && ( snakeFood.length === 0 )){
             let newFood = Object.values(generateCoords());
+            console.log('new food with coords: ', newFood);
             let snakeBodyHash = {};
             snakeBody.map(( segment, index ) => snakeBodyHash[segment] = index);
             while( snakeBodyHash.hasOwnProperty(newFood) ){
+                console.log('snakeBodyHash found existing food');
                 newFood = Object.values(generateCoords());
             }
             dispatch({ type: "GENERATE_FOOD", foodX: newFood[0], foodY: newFood[1] });
         }
-    }, [ticksElapsed, snakeFood, snakeBody]);
+    }, [ticksElapsed, snakeBody]);
+    // }, [ticksElapsed, snakeFood, snakeBody]);
 
     React.useEffect(() => {
         if( inProgress && ( ticksElapsed === 0 )){
@@ -45,7 +48,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood 
                     key={j}
                     rowPos={j}
                     xSet={ySet && ySet.has(j) ? xSet : null}
-                    xFoodCoord={yFoodCoord && yFoodCoord === j ? xFoodCoord : null}
+                    xFoodCoord={( yFoodCoord !== undefined ) && yFoodCoord === j ? xFoodCoord : null}
                 />
             )
         }
