@@ -10,13 +10,6 @@ const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
     let directionRef = React.useRef(null);
     directionRef.current = direction;
 
-    const getStats = () => {
-        console.log('=== getStats ===');
-        console.log('inProgress: ', inProgress);
-        console.log('snakeBody: ', snakeBody);
-        console.log('snakeFood: ', snakeFood);
-    };
-
     const getNextSnakeBody = () => {
         let newPosition = [];
         switch( direction ){
@@ -38,8 +31,6 @@ const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
     }
 
     React.useEffect(() => {
-        // console.log('=== Clock.jsx ===');
-        // getStats();
         console.log('current snakebody: ', snakeBodyRef.current);
         let currentSnakeHead = snakeBodyRef.current[0];
         let nextSnakeBody = getNextSnakeBody();
@@ -48,25 +39,19 @@ const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
         if( snakeBodyRef.current.length !== 0 ){
             if( currentSnakeHead[0] === snakeFoodRef.current[0] && currentSnakeHead[1] === snakeFoodRef.current[1] ){
                 console.log('=== COLLISION IN PROGRESS ===');
+                // generate new food and update score here
             }
         }
+        // if statement for detecting body collision
+        // => end game
         if( nextSnakeBody.length !== 0 ){
             let nextSnakeHead = nextSnakeBody[0];
             if( nextSnakeHead[0] === snakeFoodRef.current[0] && nextSnakeHead[1] === snakeFoodRef.current[1] ){
                 console.log('=== IMMINENT COLLISION ===');
             }
         }
-        // find when there is a collision event CURRENTLY with food
-            // => new food & score
-        // find when there is a collision event CURRENTLY with snake body
-            // => end app
     });
 
-    // this should no longer have reliance on [ snakeBody ] and only [ inProgress ]
-    // it should only progress clock tick
-    // display current position
-    // display potential next head position
-    // dispatch action depending on whether potential head position collides with 1) food, 2) body, 3) nothing and dispatch accordingly
     React.useEffect(() => {
         const progressTimer = setInterval(function () {
             if( inProgress ){
