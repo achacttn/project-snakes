@@ -10,6 +10,58 @@ const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
     let directionRef = React.useRef(null);
     directionRef.current = direction;
 
+    const getStats = () => {
+        console.log('=== getStats ===');
+        console.log('inProgress: ', inProgress);
+        console.log('snakeBody: ', snakeBody);
+        console.log('snakeFood: ', snakeFood);
+    };
+
+    const getNextSnakeBody = () => {
+        let newPosition = [];
+        switch( direction ){
+            case "UP":
+                newPosition = snakeBodyRef.current.map( ([ segmentX, segmentY ]) => [ segmentX, ( 20+segmentY-1 )%20 ]);
+                return newPosition;
+            case "DOWN":
+                newPosition = snakeBodyRef.current.map( ([ segmentX, segmentY ]) => [ segmentX, ( segmentY+1 )%20 ]);
+                return newPosition;
+            case "LEFT":
+                newPosition = snakeBodyRef.current.map( ([ segmentX, segmentY ]) => [ ( 20+segmentX-1 )%20, segmentY ]);
+                return newPosition;
+            case "RIGHT":
+                newPosition = snakeBodyRef.current.map( ([ segmentX, segmentY ]) => [ ( segmentX+1 )%20, segmentY ]);
+                return newPosition;
+            default:
+                break;
+        }
+    }
+
+    React.useEffect(() => {
+        // console.log('=== Clock.jsx ===');
+        // getStats();
+        console.log('current snakebody: ', snakeBodyRef.current);
+        let currentSnakeHead = snakeBodyRef.current[0];
+        let nextSnakeBody = getNextSnakeBody();
+        console.log('next snakeBody: ', getNextSnakeBody());
+        console.log('food position: ', snakeFoodRef.current);
+        if( snakeBodyRef.current.length !== 0 ){
+            if( currentSnakeHead[0] === snakeFoodRef.current[0] && currentSnakeHead[1] === snakeFoodRef.current[1] ){
+                console.log('=== COLLISION IN PROGRESS ===');
+            }
+        }
+        if( nextSnakeBody.length !== 0 ){
+            let nextSnakeHead = nextSnakeBody[0];
+            if( nextSnakeHead[0] === snakeFoodRef.current[0] && nextSnakeHead[1] === snakeFoodRef.current[1] ){
+                console.log('=== IMMINENT COLLISION ===');
+            }
+        }
+        // find when there is a collision event CURRENTLY with food
+            // => new food & score
+        // find when there is a collision event CURRENTLY with snake body
+            // => end app
+    });
+
     // this should no longer have reliance on [ snakeBody ] and only [ inProgress ]
     // it should only progress clock tick
     // display current position
@@ -18,36 +70,11 @@ const Clock = ({ dispatch, inProgress, direction, snakeBody, snakeFood }) => {
     React.useEffect(() => {
         const progressTimer = setInterval(function () {
             if( inProgress ){
-                // console.log('Calculating next action')
-                console.log('Current snakeHead from redux: ', snakeBody[0]);
-                console.log('Current snakeHead from ref: ', snakeBodyRef.current[0]);
-                // let [ snakeHeadX, snakeHeadY ] = snakeBodyRef.current[0];
-                // let newSnakeHeadPosition = [];
-                // switch( directionRef.current ){
-                //     case "UP":
-                //         newSnakeHeadPosition = [ snakeHeadX, ( 20+snakeHeadY-1 )%20 ];
-                //     case "DOWN":
-                //         newSnakeHeadPosition = [ snakeHeadX, ( snakeHeadY+1 )%20 ];
-                //     case "LEFT":
-                //         newSnakeHeadPosition = [ ( 20+snakeHeadX-1 )%20, snakeHeadY ];
-                //     case "RIGHT":
-                //         newSnakeHeadPosition = [ ( snakeHeadX+1 )%20, snakeHeadY ];
-                //     default:
-                //         break;
-                // }
-                // console.log('new head position: ', newSnakeHeadPosition)
-                // if( newSnakeHeadPosition[0] === snakeFood[0] && newSnakeHeadPosition[1] && snakeFood[1] ){
-                //     console.log('FOOD COLLISION!')
-                // }
-                // detect collision type
-                // food: move the snake, grow the snake, and generate different food
-                // snake: kill the snake, end the game
-                // none: dispatch({ type: "MOVE_SNAKE" })
                 dispatch({ type: "MOVE_SNAKE" });
             }
-        }, 1000);
+        }, 500);
         return () => clearInterval(progressTimer);
-    }, [ inProgress, snakeBody ]);
+    }, [ inProgress ]);
 
     return (
         <></>
@@ -58,7 +85,6 @@ let mapStateToProps = ( state ) => {
     let { inProgress, direction, snakeBody, snakeFood } = state.gameState;
     return { inProgress, direction, snakeBody, snakeFood };
 }
-
 export default connect(
     mapStateToProps,
     null,
