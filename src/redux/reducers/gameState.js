@@ -18,6 +18,7 @@ const initialState = {
     tickRate        : 1000,
     score           : 0,
     direction       : "RIGHT",
+    digesting       : 0,
 
     snakeBody       : [],
     snakeFood       : [],
@@ -92,6 +93,7 @@ export default ( state = initialState, action ) => {
             return Object.assign({}, state, {
                 snakeFood: [],
                 score: state.score+1,
+                digesting: state.digesting+1,
             });
         default:
             return Object.assign({}, state);

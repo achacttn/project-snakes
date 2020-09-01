@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
-const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction }) => {
+const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction, score }) => {
     
     // React.useEffect(()=>{
     //     console.log('=== ControlPanel.jsx mounted ===');
@@ -12,7 +12,7 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction }) =
         <div className={style.ControlPanelContainer}>
             <div className={style.ControlPanelGridContainer}>
                 <div className={style.GridScoreLabel}>Score</div>
-                <div className={style.GridScoreValue}>score-value</div>
+                <div className={style.GridScoreValue}>{ score.toString() }</div>
                 <div className={style.GridSizeLabel}>Board size</div>
                 <div className={style.GridSizeValue}>{ size.toString() }</div>
                 <div className={style.GridTickrateLabel}>Tickrate</div>
@@ -35,8 +35,8 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction }) =
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress, ticksElapsed, direction } = state.gameState;
-    return { size, inProgress, ticksElapsed, direction };
+    let { inProgress, ticksElapsed, direction, score } = state.gameState;
+    return { size, inProgress, ticksElapsed, direction, score };
 };
 
 export default connect(
