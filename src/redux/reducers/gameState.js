@@ -9,6 +9,7 @@ import {
     MATERIALIZE_SNAKE,
     MOVE_SNAKE,
     GENERATE_FOOD,
+    EAT_FOOD,
 } from '../actionTypes.js';
 
 const initialState = {
@@ -86,7 +87,12 @@ export default ( state = initialState, action ) => {
         case GENERATE_FOOD:
             return Object.assign({}, state, {
                 snakeFood: [action.foodX, action.foodY]
-            })
+            });
+        case EAT_FOOD:
+            return Object.assign({}, state, {
+                snakeFood: [],
+                score: state.score+1,
+            });
         default:
             return Object.assign({}, state);
     }
