@@ -6,10 +6,10 @@
 }
 
 .BoardEdge {
-    max-width: 1200px;
+    max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    min-height: 1200px;
+    min-height: 600px;
     height: 100%;
     /* padding: 20px 0px; */
     /* border: 1px solid purple; */
@@ -19,7 +19,7 @@
     /* min-width: 1200px; */
     width: 100%;
     /* margin: 0 auto; */
-    min-height: 1200px;
+    min-height: 600px;
     height: 100%;
     display: flex;
     flex-flow: column nowrap;

@@ -3,12 +3,7 @@ import { connect } from 'react-redux';
 import style from './Row.module.css';
 import Square from './Square.jsx';
 
-const Row = ({ xSet, xFoodCoord, size, rowPos, snakeBody }) => {
-
-    // React.useEffect(()=>{
-    //     console.log('=== Row component mounted ===');
-    //     console.log(`Row ${rowPos} with xSet: `, xSet);
-    // });
+const Row = ({ occupiedSquares, xSet, xFoodCoord, size, rowPos, snakeBody, score, pathHistory, snakeFood }) => {
 
     const generateSquares = () => {
         let squareContainer = [];
@@ -18,7 +13,8 @@ const Row = ({ xSet, xFoodCoord, size, rowPos, snakeBody }) => {
                     key={i}
                     rowPos={rowPos}
                     squarePos={i}
-                    snakeOccupied={xSet && xSet.has(i) ? true : false}
+                    // snakeOccupied={xSet && xSet.has(i) ? true : false}
+                    snakeOccupied={ occupiedSquares&& occupiedSquares.indexOf(i) !== -1 ? true : false }
                     foodOccupied={( xFoodCoord !== undefined ) && xFoodCoord === i ? true : false}
                 />
             )
@@ -37,8 +33,8 @@ const Row = ({ xSet, xFoodCoord, size, rowPos, snakeBody }) => {
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { snakeBody } = state.gameState;
-    return { size, snakeBody };
+    let { snakeBody, score, pathHistory, snakeFood } = state.gameState;
+    return { size, snakeBody, score, pathHistory, snakeFood };
 }
 
 export default connect(
