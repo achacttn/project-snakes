@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import style from './Board.module.css';
 import Row from './Row.jsx';
 
-const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood, direction, pathHistory, snakeHead, score }) => {
+const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score }) => {
 
     const generateCoords = () => {
         let xCoord = Math.floor( Math.random() * size );
@@ -11,25 +11,44 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
         return { xCoord, yCoord };
     };
 
+    const findArrIn2dArr = ( arr, bigArr ) => {
+        let [ x, y ] = arr;
+        for( let i=0; i<bigArr.length; i++ ){
+            let [ currentX, currentY ] = bigArr[i];
+            if( x === currentX && y === currentY ){
+                return true;
+            }
+        }
+        return false;
+    }
+
     const generateFood = () => {
         let newFood = Object.values(generateCoords());
-        let snakeBodyHash = {};
-        snakeBody.map(( segment, index ) => snakeBodyHash[segment] = index );
-        while( snakeBodyHash.hasOwnProperty( newFood )){
+        let occupiedSegments = pathHistory.slice( 0, score+1 );
+        while( findArrIn2dArr( newFood, occupiedSegments ) ){
             newFood = Object.values(generateCoords());
         }
         return newFood;
     };
 
     React.useEffect(() => {
-        let [snakeHeadX, snakeHeadY] = snakeHead;
-        let [snakeFoodX, snakeFoodY] = snakeFood;
         if( snakeHead.length !== 0 ){
+            let [ snakeHeadX, snakeHeadY ] = snakeHead;
+            let [ snakeFoodX, snakeFoodY ] = snakeFood;
             if( snakeHeadX === snakeFoodX && snakeHeadY === snakeFoodY ){
                 dispatch({ type: "EAT_FOOD" });
             }
         }
     }, [ snakeHead, snakeFood ]);
+
+    React.useEffect(() => {
+        if( inProgress && score > 0 ){
+            let nonHeadSegments             = pathHistory.slice( 1, score+1 );
+            if( findArrIn2dArr( snakeHead, nonHeadSegments ) ){
+                    dispatch({ type: "END_GAME" });
+            }
+        }
+    }, [ pathHistory ]);
 
     React.useEffect(() => {
         if( inProgress && ( snakeFood.length === 0 ) ){
@@ -66,7 +85,6 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
                     key={j}
                     rowPos={j}
                     occupiedSquares={( occupiedSquareContainingRows.hasOwnProperty(j) ? occupiedSquareContainingRows[j] : null )}
-                    // xSet={ySet && ySet.has(j) ? xSet : null}
                     xFoodCoord={( yFoodCoord !== undefined ) && yFoodCoord === j ? xFoodCoord : null}
                 />
             )
@@ -87,8 +105,8 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { inProgress, ticksElapsed, snakeBody, snakeFood, direction, pathHistory, snakeHead, score } = state.gameState;
-    return { size, inProgress, ticksElapsed, snakeBody, snakeFood, direction, pathHistory, snakeHead, score };
+    let { inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score } = state.gameState;
+    return { size, inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score };
 };
 
 export default connect(

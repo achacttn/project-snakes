@@ -1,5 +1,11 @@
 # Project Snake
 
+### TODO
+
+- Similar to Food collision, check for body collision => end game
+- No more room for food generation => end game
+- add cosmetic head
+
 ### Major bugs
 
 <!-- - Move snake function:

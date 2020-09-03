@@ -18,3 +18,5 @@ export const MOVE_SNAKE_HEAD        = "MOVE_SNAKE_HEAD";
 export const GENERATE_FOOD          = "GENERATE_FOOD";
 export const EAT_FOOD               = "EAT_FOOD";
 export const ADD_MOVEMENT_HISTORY   = "ADD_MOVEMENT_HISTORY";
+
+export const END_GAME               = "END_GAME";
