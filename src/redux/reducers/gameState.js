@@ -1,18 +1,19 @@
 import {
     TOGGLE_PLAY,
     CLOCK_RUN,
-    DIRECTION_UP,
-    DIRECTION_DOWN,
-    DIRECTION_LEFT,
-    DIRECTION_RIGHT,
+    // DIRECTION_UP,
+    // DIRECTION_DOWN,
+    // DIRECTION_LEFT,
+    // DIRECTION_RIGHT,
 
-    MATERIALIZE_SNAKE,
+    // MATERIALIZE_SNAKE,
     CREATE_SNAKE_HEAD,
-    MOVE_SNAKE,
+    // MOVE_SNAKE,
     MOVE_SNAKE_HEAD,
     GENERATE_FOOD,
     EAT_FOOD,
     ADD_MOVEMENT_HISTORY,
+    SET_DIRECTION,
 } from '../actionTypes.js';
 
 const initialState = {
@@ -39,63 +40,67 @@ export default ( state = initialState, action ) => {
             return Object.assign({}, state, {
                 ticksElapsed: state.ticksElapsed+1,
             });
-        case DIRECTION_UP:
+        case SET_DIRECTION:
             return Object.assign({}, state, {
-                direction: "UP",
+                direction: action.direction,
             });
-        case DIRECTION_DOWN:
-            return Object.assign({}, state, {
-                direction: "DOWN",
-            });
-        case DIRECTION_LEFT:
-            return Object.assign({}, state, {
-                direction: "LEFT",
-            });
-        case DIRECTION_RIGHT:
-            return Object.assign({}, state, {
-                direction: "RIGHT",
-            });
-        case MATERIALIZE_SNAKE:
-            return Object.assign({}, state, {
-                snakeBody: [[action.xCoord, action.yCoord]],
-            });
+        // case DIRECTION_UP:
+        //     return Object.assign({}, state, {
+        //         direction: "UP",
+        //     });
+        // case DIRECTION_DOWN:
+        //     return Object.assign({}, state, {
+        //         direction: "DOWN",
+        //     });
+        // case DIRECTION_LEFT:
+        //     return Object.assign({}, state, {
+        //         direction: "LEFT",
+        //     });
+        // case DIRECTION_RIGHT:
+        //     return Object.assign({}, state, {
+        //         direction: "RIGHT",
+        //     });
+        // case MATERIALIZE_SNAKE:
+        //     return Object.assign({}, state, {
+        //         snakeBody: [[action.xCoord, action.yCoord]],
+        //     });
         case CREATE_SNAKE_HEAD:
             let snakeHeadCoords = [ action.xCoord, action.yCoord ];
             return Object.assign({}, state, {
                 snakeHead   : snakeHeadCoords,
                 pathHistory : [ snakeHeadCoords, ...state.pathHistory ],
             });
-        case MOVE_SNAKE:
-            let newPosition = [];
-            switch( state.direction ){
-                case "UP":
-                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (20+segmentY-1)%20 ] );
-                    return Object.assign({}, state, {
-                        snakeBody: newPosition,
-                        ticksElapsed: state.ticksElapsed+1,
-                    });
-                case "DOWN":
-                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (segmentY+1)%20 ] );
-                    return Object.assign({}, state, {
-                        snakeBody: newPosition,
-                        ticksElapsed: state.ticksElapsed+1,
-                    });
-                case "LEFT":
-                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (20+segmentX-1)%20, segmentY ] );
-                    return Object.assign({}, state, {
-                        snakeBody: newPosition,
-                        ticksElapsed: state.ticksElapsed+1,
-                    });
-                case "RIGHT":
-                    newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (segmentX+1)%20, segmentY ] );
-                    return Object.assign({}, state, {
-                        snakeBody: newPosition,
-                        ticksElapsed: state.ticksElapsed+1,
-                    });
-                default:
-                    break;
-            }
-            break;
+        // case MOVE_SNAKE:
+        //     let newPosition = [];
+        //     switch( state.direction ){
+        //         case "UP":
+        //             newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (20+segmentY-1)%20 ] );
+        //             return Object.assign({}, state, {
+        //                 snakeBody: newPosition,
+        //                 ticksElapsed: state.ticksElapsed+1,
+        //             });
+        //         case "DOWN":
+        //             newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ segmentX, (segmentY+1)%20 ] );
+        //             return Object.assign({}, state, {
+        //                 snakeBody: newPosition,
+        //                 ticksElapsed: state.ticksElapsed+1,
+        //             });
+        //         case "LEFT":
+        //             newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (20+segmentX-1)%20, segmentY ] );
+        //             return Object.assign({}, state, {
+        //                 snakeBody: newPosition,
+        //                 ticksElapsed: state.ticksElapsed+1,
+        //             });
+        //         case "RIGHT":
+        //             newPosition = state.snakeBody.map( ([ segmentX, segmentY ]) => [ (segmentX+1)%20, segmentY ] );
+        //             return Object.assign({}, state, {
+        //                 snakeBody: newPosition,
+        //                 ticksElapsed: state.ticksElapsed+1,
+        //             });
+        //         default:
+        //             break;
+        //     }
+        //     break;
         case MOVE_SNAKE_HEAD:
             let [ currentHeadX, currentHeadY ] = state.snakeHead;
             let newHeadPosition = [];

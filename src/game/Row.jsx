@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import style from './Row.module.css';
 import Square from './Square.jsx';
 
-const Row = ({ occupiedSquares, xSet, xFoodCoord, size, rowPos, snakeBody, score, pathHistory, snakeFood }) => {
+const Row = ({ occupiedSquares, xFoodCoord, size, rowPos,  }) => {
 
     const generateSquares = () => {
         let squareContainer = [];
@@ -13,7 +13,6 @@ const Row = ({ occupiedSquares, xSet, xFoodCoord, size, rowPos, snakeBody, score
                     key={i}
                     rowPos={rowPos}
                     squarePos={i}
-                    // snakeOccupied={xSet && xSet.has(i) ? true : false}
                     snakeOccupied={ occupiedSquares&& occupiedSquares.indexOf(i) !== -1 ? true : false }
                     foodOccupied={( xFoodCoord !== undefined ) && xFoodCoord === i ? true : false}
                 />
@@ -33,8 +32,7 @@ const Row = ({ occupiedSquares, xSet, xFoodCoord, size, rowPos, snakeBody, score
 
 let mapStateToProps = ( state ) => {
     let { size } = state.board;
-    let { snakeBody, score, pathHistory, snakeFood } = state.gameState;
-    return { size, snakeBody, score, pathHistory, snakeFood };
+    return { size };
 }
 
 export default connect(

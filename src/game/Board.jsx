@@ -5,35 +5,6 @@ import Row from './Row.jsx';
 
 const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood, direction, pathHistory, snakeHead, score }) => {
 
-    // React.useEffect(() => {
-    //     console.log('=== PATH HISTORY ===');
-    //     console.log(pathHistory);
-    // })
-
-    let snakeBodyRef = React.useRef(null);
-    snakeBodyRef.current = snakeBody;
-    let snakeFoodRef = React.useRef(null);
-    snakeFoodRef.current = snakeFood;
-
-    React.useEffect(() => {
-        let [ snakeHeadX, snakeHeadY ] = snakeHead;
-        let [ snakeFoodX, snakeFoodY ] = snakeFood;
-        if( snakeHead.length !==0 ){
-            if (snakeHeadX === snakeFoodX && snakeHeadY === snakeFoodY ){
-                dispatch({ type: "EAT_FOOD" });
-            }
-        }
-    })
-
-    React.useEffect(() => {
-        let currentSnakeHead = snakeBodyRef.current[0];
-        if (snakeBodyRef.current.length !== 0) {
-            if (currentSnakeHead[0] === snakeFoodRef.current[0] && currentSnakeHead[1] === snakeFoodRef.current[1]) {
-                dispatch({ type: "EAT_FOOD" });
-            }
-        }
-    });
-
     const generateCoords = () => {
         let xCoord = Math.floor( Math.random() * size );
         let yCoord = Math.floor( Math.random() * size );
@@ -51,11 +22,21 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
     };
 
     React.useEffect(() => {
+        let [snakeHeadX, snakeHeadY] = snakeHead;
+        let [snakeFoodX, snakeFoodY] = snakeFood;
+        if( snakeHead.length !== 0 ){
+            if( snakeHeadX === snakeFoodX && snakeHeadY === snakeFoodY ){
+                dispatch({ type: "EAT_FOOD" });
+            }
+        }
+    }, [ snakeHead, snakeFood ]);
+
+    React.useEffect(() => {
         if( inProgress && ( snakeFood.length === 0 ) ){
             let newFood = generateFood();
             dispatch({ type: "GENERATE_FOOD", foodX: newFood[0], foodY: newFood[1] })
         }
-    });
+    }, [ inProgress, snakeFood ]);
 
     React.useEffect(() => {
         if( inProgress && ( ticksElapsed === 0 )){
@@ -65,15 +46,10 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
     }, [ inProgress ]);
 
     const generateRows = () => {
-        let xSet    = new Set();
-        let ySet    = new Set();
-        let snakeBodyCoords = pathHistory.slice( 0, score+1 );
-        for( let i=0; i<snakeBodyCoords.length; i++ ){
-            xSet.add(snakeBodyCoords[i][0]);
-            ySet.add(snakeBodyCoords[i][1]);
-        }
 
-        let occupiedSquareContainingRows = {};
+        let snakeBodyCoords                 = pathHistory.slice( 0, score+1 );
+        let occupiedSquareContainingRows    = {};
+
         snakeBodyCoords.map( segment => {
             let [ segmentX, segmentY ] = segment;
             if( !occupiedSquareContainingRows.hasOwnProperty( segmentY )){
@@ -82,15 +58,15 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeBody, snakeFood,
             occupiedSquareContainingRows[ segmentY ].push( segmentX );
         });
 
-        let [ xFoodCoord, yFoodCoord ] = snakeFood;
-        let rowContainer = [];
+        let [ xFoodCoord, yFoodCoord ]  = snakeFood;
+        let rowContainer                = [];
         for( let j=0; j<size; j++ ){
             rowContainer.push(
                 <Row
                     key={j}
                     rowPos={j}
                     occupiedSquares={( occupiedSquareContainingRows.hasOwnProperty(j) ? occupiedSquareContainingRows[j] : null )}
-                    xSet={ySet && ySet.has(j) ? xSet : null}
+                    // xSet={ySet && ySet.has(j) ? xSet : null}
                     xFoodCoord={( yFoodCoord !== undefined ) && yFoodCoord === j ? xFoodCoord : null}
                 />
             )

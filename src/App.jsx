@@ -7,24 +7,50 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = ({ dispatch, inProgress, ticksElapsed, direction }) => {
+const App = ({ dispatch, snakeHead, pathHistory }) => {
 
     const containerRef = React.useRef(null);
 
+    const getDirectionCameFrom = () => {
+        if( pathHistory[1] === undefined ){ return };
+        let [ currentHeadX, currentHeadY ]      = snakeHead;
+        let [ previousHeadX, previousHeadY ]    = pathHistory[1];
+        let differenceX = currentHeadX - previousHeadX;
+        let differenceY = currentHeadY - previousHeadY;
+        let directionCameFrom;
+        if( differenceX > 0 ){
+            directionCameFrom = "LEFT";
+            return directionCameFrom;
+        }
+        if( differenceX < 0 ){
+            directionCameFrom = "RIGHT";
+            return directionCameFrom;
+        }
+        if( differenceY > 0 ){
+            directionCameFrom = "UP";
+            return directionCameFrom;
+        }
+        if( differenceY < 0 ){
+            directionCameFrom = "DOWN";
+            return directionCameFrom;
+        }
+    }
+
     const keyPressHandler = event => {
         event.preventDefault();
+        let previousDirection = getDirectionCameFrom();
         switch( event.keyCode ){
             case 37:
-                if( direction !== "RIGHT" ){ dispatch({ type: "DIRECTION_LEFT" })};
+                if( previousDirection !== "LEFT" ){ dispatch({ type: "SET_DIRECTION", direction: "LEFT" })};
                 return null;
             case 38:
-                if( direction !== "DOWN" ){ dispatch({ type: "DIRECTION_UP" })}
+                if( previousDirection !== "UP" ){ dispatch({ type: "SET_DIRECTION", direction: "UP" })}
                 return null;
             case 39:
-                if( direction !== "LEFT" ){ dispatch({ type: "DIRECTION_RIGHT" })};
+                if( previousDirection !== "RIGHT" ){ dispatch({ type: "SET_DIRECTION", direction: "RIGHT" })};
                 return null;
             case 40:
-                if( direction !== "UP" ){ dispatch({ type: "DIRECTION_DOWN" })};
+                if( previousDirection !== "DOWN" ){ dispatch({ type: "SET_DIRECTION", direction: "DOWN" })};
                 return null;
             default:
                 break;
@@ -47,8 +73,8 @@ const App = ({ dispatch, inProgress, ticksElapsed, direction }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { inProgress, ticksElapsed, direction } = state.gameState;
-    return { inProgress, ticksElapsed, direction };
+    let { direction, snakeHead, pathHistory } = state.gameState;
+    return { direction, snakeHead, pathHistory };
 }
 
 export default connect(
