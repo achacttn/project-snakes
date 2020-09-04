@@ -1,38 +1,43 @@
 import {
+    INCREASE_BOARD,
+    DECREASE_BOARD,
     TOGGLE_PLAY,
     CLOCK_RUN,
-    // DIRECTION_UP,
-    // DIRECTION_DOWN,
-    // DIRECTION_LEFT,
-    // DIRECTION_RIGHT,
-
-    // MATERIALIZE_SNAKE,
     CREATE_SNAKE_HEAD,
-    // MOVE_SNAKE,
     MOVE_SNAKE_HEAD,
-    GENERATE_FOOD,
     EAT_FOOD,
+    GENERATE_FOOD,
     ADD_MOVEMENT_HISTORY,
     SET_DIRECTION,
     END_GAME,
 } from '../actionTypes.js';
 
 const initialState = {
+    size            : 20,
     inProgress      : false,
     ticksElapsed    : 0,
     tickRate        : 1000,
     score           : 0,
     direction       : "RIGHT",
-    digesting       : 0,
     pathHistory     : [],
 
     snakeHead       : [],
     snakeBody       : [],
     snakeFood       : [],
+
+    finished        : false,
 };
 
 export default ( state = initialState, action ) => {
     switch( action.type ){
+        case INCREASE_BOARD:
+            return Object.assign({}, state, {
+                size: ( state.size > 29 ? state.size : state.size+1 )
+            });
+        case DECREASE_BOARD:
+            return Object.assign({}, state, {
+                size: ( state.size < 21 ? state.size : state.size-1 )
+            });
         case TOGGLE_PLAY:
             return Object.assign({}, state, {
                 inProgress: !state.inProgress
@@ -98,17 +103,17 @@ export default ( state = initialState, action ) => {
         case EAT_FOOD:
             return Object.assign({}, state, {
                 snakeFood: [],
-                score: state.score+1,
-                digesting: state.digesting+1,
-            });
+                score: state.score + 1,
+        });
         case ADD_MOVEMENT_HISTORY:
             return Object.assign({}, state, {
                 pathHistory: [ action.pathHistory, ...state.pathHistory ],
             });
         case END_GAME:
             return Object.assign({}, state, {
-                inProgress: false,                
-            })
+                inProgress  : false,
+                finished    : true,
+            });
         default:
             return Object.assign({}, state);
     }

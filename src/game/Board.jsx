@@ -42,13 +42,13 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeFood, pathHistor
     }, [ snakeHead, snakeFood ]);
 
     React.useEffect(() => {
-        if( inProgress && score > 0 ){
+        if( inProgress && score > 2 ){
             let nonHeadSegments             = pathHistory.slice( 1, score+1 );
             if( findArrIn2dArr( snakeHead, nonHeadSegments ) ){
-                    dispatch({ type: "END_GAME" });
+                dispatch({ type: "END_GAME" });
             }
         }
-    }, [ pathHistory ]);
+    }, [ snakeHead, pathHistory ]);
 
     React.useEffect(() => {
         if( inProgress && ( snakeFood.length === 0 ) ){
@@ -104,8 +104,7 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeFood, pathHistor
 };
 
 let mapStateToProps = ( state ) => {
-    let { size } = state.board;
-    let { inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score } = state.gameState;
+    let { size, inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score } = state.gameState;
     return { size, inProgress, ticksElapsed, snakeFood, pathHistory, snakeHead, score };
 };
 

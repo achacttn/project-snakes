@@ -34,8 +34,7 @@ const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction, sco
 };
 
 let mapStateToProps = ( state ) => {
-    let { size } = state.board;
-    let { inProgress, ticksElapsed, direction, score } = state.gameState;
+    let { size, inProgress, ticksElapsed, direction, score } = state.gameState;
     return { size, inProgress, ticksElapsed, direction, score };
 };
 

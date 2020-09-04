@@ -8,7 +8,7 @@ const Clock = ({ dispatch, inProgress }) => {
             if( inProgress ){
                 dispatch({ type: "MOVE_SNAKE_HEAD" });
             }
-        }, 500);
+        }, 250);
         return () => clearInterval(progressTimer);
     }, [ inProgress ]);
 

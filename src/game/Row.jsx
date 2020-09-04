@@ -31,7 +31,7 @@ const Row = ({ occupiedSquares, xFoodCoord, size, rowPos,  }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { size } = state.board;
+    let { size } = state.gameState;
     return { size };
 }
 

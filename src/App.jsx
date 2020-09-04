@@ -7,7 +7,7 @@ import Board from './game/Board.jsx'
 import style from './App.module.css';
 import Wrapper from './layout/Wrapper.jsx';
 
-const App = ({ dispatch, snakeHead, pathHistory }) => {
+const App = ({ dispatch, finished, snakeHead, pathHistory }) => {
 
     const containerRef = React.useRef(null);
 
@@ -66,15 +66,15 @@ const App = ({ dispatch, snakeHead, pathHistory }) => {
             <div className={style.AppContainer} onKeyDown={keyPressHandler} ref={containerRef} tabIndex={-1}>
                 <Clock />
                 <ControlPanel />
-                <Board />
+                { finished ? null : <Board/> }
             </div>
         </Wrapper>
     );
 };
 
 let mapStateToProps = ( state ) => {
-    let { direction, snakeHead, pathHistory } = state.gameState;
-    return { direction, snakeHead, pathHistory };
+    let { finished, snakeHead, pathHistory } = state.gameState;
+    return { finished, snakeHead, pathHistory };
 }
 
 export default connect(
