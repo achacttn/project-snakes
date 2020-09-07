@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Clock = ({ dispatch, inProgress }) => {
+const Clock = ({ dispatch, inProgress, tickRate }) => {
     
     React.useEffect(() => {
         const progressTimer = setInterval(() => {
             if( inProgress ){
                 dispatch({ type: "MOVE_SNAKE_HEAD" });
             }
-        }, 250);
+        }, tickRate );
         return () => clearInterval(progressTimer);
     }, [ inProgress ]);
 
@@ -18,8 +18,8 @@ const Clock = ({ dispatch, inProgress }) => {
 };
 
 let mapStateToProps = ( state ) => {
-    let { inProgress } = state.gameState;
-    return { inProgress };
+    let { inProgress, tickRate } = state.gameState;
+    return { inProgress, tickRate };
 }
 export default connect(
     mapStateToProps,

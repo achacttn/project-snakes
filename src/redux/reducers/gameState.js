@@ -16,7 +16,7 @@ const initialState = {
     size            : 20,
     inProgress      : false,
     ticksElapsed    : 0,
-    tickRate        : 1000,
+    tickRate        : 300,
     score           : 0,
     direction       : "RIGHT",
     pathHistory     : [],
