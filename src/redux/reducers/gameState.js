@@ -62,7 +62,7 @@ export default ( state = initialState, action ) => {
             let newPathHistory  = [];
             switch( state.direction ){
                 case "UP":
-                    newHeadPosition = [ currentHeadX, ( 20+currentHeadY-1 )%20 ];
+                    newHeadPosition = [ currentHeadX, ( state.size+currentHeadY-1 )%state.size ];
                     newPathHistory  = [ newHeadPosition, ...state.pathHistory ]
                     return Object.assign({}, state, {
                         snakeHead       : newHeadPosition,
@@ -70,7 +70,7 @@ export default ( state = initialState, action ) => {
                         ticksElapsed    : state.ticksElapsed+1,
                     });
                 case "DOWN":
-                    newHeadPosition = [ currentHeadX, ( currentHeadY+1 )%20 ];
+                    newHeadPosition = [ currentHeadX, ( currentHeadY+1 )%state.size ];
                     newPathHistory  = [ newHeadPosition, ...state.pathHistory ]
                     return Object.assign({}, state, {
                         snakeHead       : newHeadPosition,
@@ -78,7 +78,7 @@ export default ( state = initialState, action ) => {
                         ticksElapsed    : state.ticksElapsed+1,
                     });
                 case "LEFT":
-                    newHeadPosition = [ ( 20+currentHeadX-1 )%20, currentHeadY ];
+                    newHeadPosition = [ ( state.size+currentHeadX-1 )%state.size, currentHeadY ];
                     newPathHistory  = [ newHeadPosition, ...state.pathHistory ]
                     return Object.assign({}, state, {
                         snakeHead       : newHeadPosition,
@@ -86,7 +86,7 @@ export default ( state = initialState, action ) => {
                         ticksElapsed    : state.ticksElapsed+1,
                     });
                 case "RIGHT":
-                    newHeadPosition = [ ( currentHeadX+1 )%20, currentHeadY ];
+                    newHeadPosition = [ ( currentHeadX+1 )%state.size, currentHeadY ];
                     newPathHistory  = [ newHeadPosition, ...state.pathHistory ]
                     return Object.assign({}, state, {
                         snakeHead       : newHeadPosition,

@@ -1,1 +1,7 @@
-    
+.EndScreenContainer {
+    width: 100%;
+    height: auto;
+    background-color: lightskyblue;
+    padding: 40px 20px;
+    text-align: center;
+}

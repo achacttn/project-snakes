@@ -4,10 +4,16 @@
     flex: 1 0 0;
 }
 
+.SnakeHeadOccupied {
+    width: 100%;
+    height: 100%;
+    background-color: lightgreen;
+}
+
 .SnakeOccupied {
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: #036412;
 }
 
 .FoodOccupied {

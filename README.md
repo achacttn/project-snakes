@@ -1,18 +1,15 @@
 # Project Snake
 
-### TODO
+### Notes
 
-- Similar to Food collision, check for body collision => end game
-- No more room for food generation => end game
-- add cosmetic head
+- Current method of drawing snake head draws rows from top to bottom, and indicates rows with squares occupied by the snake body segments.
+This can cause problems when trying to distinguish and style the snake head segment, as the order in which rows are drawn is not guaranteed to be the order in which the snake body segments are laid out (i.e. no guarantee of snake position being top to bottom e.g. if the snake is coiled, a middle body segment may be near the top of the board and drawn first)
 
-### Major bugs
+### BUGS & FIXES
 
 <!-- - Move snake function:
 At the moment, every segment of the snake is moved in the direction set by controls. This is not problematic if only the head exists. However, when the snake body segment makes turns, then the segments must travel through the path history of the head. -->
 => Fixed by recording path history, and filling in squares occupied by snake according to snake length, starting from most recent path history entry.
-
-### Minor bugs
 
 <!-- - Potential bypassing of movement functions: currently movement in directions the head came from is not allowed (i.e. if going upwards, cannot suddenly reverse direction and go down). However, if controls are applied such that in the aforementioned case, the direction is set to left, or right, before going down, then the snake can reverse course within 1 tick. Additional checks are required. -->
 => Will be fixed by checking direction of "neck" segment.

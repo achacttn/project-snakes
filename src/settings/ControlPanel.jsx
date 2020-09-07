@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import style from './ControlPanel.module.css';
 
 const ControlPanel = ({ dispatch, size, inProgress, ticksElapsed, direction, score }) => {
-    
-    // React.useEffect(()=>{
-    //     console.log('=== ControlPanel.jsx mounted ===');
-    // });
-    
+
     return (
         <div className={style.ControlPanelContainer}>
             <div className={style.ControlPanelGridContainer}>

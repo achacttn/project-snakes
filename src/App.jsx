@@ -1,10 +1,11 @@
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import React from 'react';
+import style from './App.module.css';
 import ControlPanel from './settings/ControlPanel.jsx';
 import Clock from './game/Clock.jsx';
-import Board from './game/Board.jsx'
-import style from './App.module.css';
+import Board from './game/Board.jsx';
+import EndScreen from './game/EndScreen.jsx';
 import Wrapper from './layout/Wrapper.jsx';
 
 const App = ({ dispatch, finished, snakeHead, pathHistory }) => {
@@ -66,7 +67,7 @@ const App = ({ dispatch, finished, snakeHead, pathHistory }) => {
             <div className={style.AppContainer} onKeyDown={keyPressHandler} ref={containerRef} tabIndex={-1}>
                 <Clock />
                 <ControlPanel />
-                { finished ? null : <Board/> }
+                { finished ? <EndScreen/> : <Board/> }
             </div>
         </Wrapper>
     );

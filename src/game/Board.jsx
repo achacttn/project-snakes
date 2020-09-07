@@ -64,6 +64,12 @@ const Board = ({ dispatch, size, inProgress, ticksElapsed, snakeFood, pathHistor
         }
     }, [ inProgress ]);
 
+    React.useEffect(() => {
+        if( score >= ( size*size-2 )){
+            dispatch({ type: "END_GAME" });
+        }
+    }, [ score ]);
+
     const generateRows = () => {
 
         let snakeBodyCoords                 = pathHistory.slice( 0, score+1 );
